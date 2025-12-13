@@ -27,7 +27,7 @@ Click `Scripts → Enable Laser` in the menu bar to enable the Laser system for 
 
 Tags only work for **non-link** items.
 
--   `AffectedByLaserForce`: Only a rigid item with this tag can be affected by the laser force.
+-   `AffectedByLaserForce`: Only a **rigid** item with this tag can be affected by the laser force.
 -   `ReflectLaser`: An item with this tag will reflect the laser.
 -   `IgnoreLaser`: An item with this tag will be ignored by the laser.
 
@@ -85,7 +85,7 @@ Basically the same as the official TNT (cannot interact with official machinerie
 | `explodeTempRequire`    |  float  |     200     | The minimum temperature required to explode the TNT.                                    |
 | `explodeForce`          |  float  |     30      | The force applied to the items around the exploded TNT.                                 |
 | `range`                 |  float  |      5      | The range of the explosion. Items within this radius will be affected by the explosion. |
-| `damageTable`           | float[] | _see below_ | The damage inflicted on player.                                                         |
+| `damageTable`           | float[] | _see below_ | The damage inflicted on player if player is hit by the laser.                           |
 
 #### Damage Table
 
