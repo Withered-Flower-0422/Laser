@@ -85,7 +85,7 @@ Basically the same as the official TNT (cannot interact with official machinerie
 | `explodeTempRequire`    |  float  |     200     | The minimum temperature required to explode the TNT.                                    |
 | `explodeForce`          |  float  |     30      | The force applied to the items around the exploded TNT.                                 |
 | `range`                 |  float  |      5      | The range of the explosion. Items within this radius will be affected by the explosion. |
-| `damageTable`           | float[] | _see below_ | The damage inflicted on player if player is hit by the laser.                           |
+| `damageTable`           | float[] | _see below_ | The damage inflicted on player if player is blown up by the TNT.                        |
 
 #### Damage Table
 
