@@ -117,6 +117,9 @@ which the laser door opens after being hit by the laser, defaults to `100`.
 
 The door will open permanently after being hit by the laser.
 
+> [!TIP]
+> To make the door be affected by the laser force, add the `AffectedByLaserForce` tag to the `Door_Left` and `Door_Right` sub-items.
+
 #### configuration
 
 If there is a `ResetOnDeath` tag in `Tags` in `Settings` component, the door will
