@@ -31,6 +31,10 @@ Tags only work for **non-link** items.
 -   `ReflectLaser`: An item with this tag will reflect the laser.
 -   `IgnoreLaser`: An item with this tag will be ignored by the laser.
 
+> [!WARNING]
+> The laser system has occupied the `LaserInstances` variable name in the `variables` module.
+> **TRY NOT** to use this variable name in your own scripts, nor to call `variables.clear()`.
+
 ## Items
 
 ### Balls
