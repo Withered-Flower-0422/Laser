@@ -81,7 +81,7 @@ A rotatable steel board that can reflect the laser.
 
 Basically the same as the official TNT (cannot interact with official machineries, e.g. blowing up the suspension bridge), explodes when hit by the laser, received a strong impact or touched by the player ball with high temperature.
 
-#### configuration
+#### Configuration
 
 | Variable                |  Type   |   Default   | Description                                                                             |
 | ----------------------- | :-----: | :---------: | :-------------------------------------------------------------------------------------- |
@@ -112,7 +112,7 @@ The damage inflicted on player depends on the player's ball type.
 
 Same as the official `LaserLockedDoor` in Ballex1.
 
-#### configuration
+#### Configuration
 
 The first element of `Tags` in `Settings` component means the duration (in frames) for
 which the laser door opens after being hit by the laser, defaults to `100`.
@@ -124,7 +124,7 @@ The door will open permanently after being hit by the laser.
 > [!TIP]
 > To make the door be affected by the laser force, add the `AffectedByLaserForce` tag to the `Door_Left` and `Door_Right` sub-items.
 
-#### configuration
+#### Configuration
 
 If there is a `ResetOnDeath` tag in `Tags` in `Settings` component, the door will
 be locked again after the player dies. Otherwise, it will remain unlocked (if it had been unlocked before).
@@ -133,7 +133,7 @@ be locked again after the player dies. Otherwise, it will remain unlocked (if it
 
 A pure laser that always emits laser rays in the positive z-axis direction of its own coordinate system.
 
-#### configuration
+#### Configuration
 
 | Variable             |      Type      |       Default       | Description                                                                                                                                                                                                              |
 | -------------------- | :------------: | :-----------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -175,7 +175,7 @@ You can configure the laser in `Laser_Head` sub-item.
 
 Same as `Laser_Static`, but continuously rotates around its own y-axis.
 
-#### configuration
+#### Configuration
 
 | Variable      | Type  | Default | Description                                 |
 | ------------- | :---: | :-----: | :------------------------------------------ |
