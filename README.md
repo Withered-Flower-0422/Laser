@@ -201,7 +201,8 @@ The repeater versions of the laser.
 ## Notes
 
 -   The `Laser` items are quite "heavy", so use them sparingly.
--   Try not to use `Laser_Rotating` as much as possible. Static lasers have cache mechanisms to ensure their performance, but an always-rotating laser cannot enjoy the same benefits.
+-   Try not to use `Laser_Rotating` excessively. Static lasers have cache mechanisms to ensure their performance, but an always-rotating laser cannot enjoy the same benefits.
+-   Try not to let the laser reflect excessively. Reflecting consumptions are quite high.
 -   It is recommended to arrange no more than four lasers within a section, as the performance may degrade significantly.
 -   Extend the distance between sections which have lasers as much as possible so that the lasers in last section don't get updated (if `stopUpdateDistance` works) to optimize performance.
 
