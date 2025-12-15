@@ -39,45 +39,75 @@ Tags only work for **non-link** items.
 
 ### Balls
 
+![WoodenBall](pics/WoodenBall.png)
+![PaperBall](pics/PaperBall.png)
+![StoneBall](pics/StoneBall.png)
+![IceBall](pics/IceBall.png)
+![SteelBall](pics/SteelBall.png)
+![RubberBall](pics/RubberBall.png)
+![BalloonBall](pics/BalloonBall.png)
+![StickyBall](pics/StickyBall.png)
+![SpongeBall](pics/SpongeBall.png)
+
 Same as the official balls, but affected by the laser force. The `SteelBall` also reflects the laser specially.
 
 ### Box
+
+![Box](pics/Box.png)
 
 Same as the official box, but affected by the laser force.
 
 ### Steel_Block
 
+![Steel_Block](pics/Steel_Block.png)
+
 A rigid steel block that is affected by the laser force, as well as reflecting the laser.
 
 ### Ice_Block
+
+![Ice_Block](pics/Ice_Block.png)
 
 A rigid ice block that is ignored by the laser.
 
 ### DoublePushBoard_TypeA
 
+![DoublePushBoard_TypeA](pics/DoublePushBoard_TypeA.png)
+
 Same as the official `DoublePushBoard_TypeA`, but affected by the laser force.
 
 ### DoublePushBoard_TypeB
+
+![DoublePushBoard_TypeB](pics/DoublePushBoard_TypeB.png)
 
 Same as the official `DoublePushBoard_TypeB`, but affected by the laser force.
 
 ### Fence
 
+![Fence](pics/Fence.png)
+
 Same as the official fence, but affected by the laser force.
 
 ### PushBoard
+
+![PushBoard](pics/PushBoard.png)
 
 Same as the official push board, but affected by the laser force.
 
 ### TBoard
 
+![TBoard](pics/TBoard.png)
+
 Same as the official TBoard, but affected by the laser force.
 
 ### Steel_Board
 
+![Steel_Board](pics/Steel_Board.png)
+
 A rotatable steel board that can reflect the laser.
 
 ### TNT
+
+![TNT](pics/TNT.png)
 
 Basically the same as the official TNT (cannot interact with official machineries, e.g. blowing up the suspension bridge), explodes when hit by the laser, received a strong impact or touched by the player ball with high temperature.
 
@@ -110,6 +140,8 @@ The damage inflicted on player depends on the player's ball type.
 
 ### LaserLockedDoor
 
+![LaserLockedDoor](pics/LaserLockedDoor.png)
+
 Same as the official `LaserLockedDoor` in Ballex1.
 
 #### Configuration
@@ -118,6 +150,8 @@ The first element of `Tags` in `Settings` component means the duration (in frame
 which the laser door opens after being hit by the laser, defaults to `100`.
 
 ### LaserLockedDoor_Joint
+
+![LaserLockedDoor_Joint](pics/LaserLockedDoor_Joint.png)
 
 The door will open permanently after being hit by the laser.
 
@@ -130,6 +164,8 @@ If there is a `ResetOnDeath` tag in `Tags` in `Settings` component, the door wil
 be locked again after the player dies. Otherwise, it will remain unlocked (if it had been unlocked before).
 
 ### Laser
+
+![Laser](pics/Laser.png)
 
 A pure laser that always emits laser rays in the positive z-axis direction of its own coordinate system.
 
@@ -169,10 +205,14 @@ The damage inflicted on player depends on the player's ball type.
 
 ### Laser_Static
 
+![Laser_Static](pics/Laser_Static.png)
+
 A static laser that emits laser rays in the positive z-axis direction of its own coordinate system.
 You can configure the laser in `Laser_Head` sub-item.
 
 ### Laser_Rotating
+
+![Laser_Rotating](pics/Laser_Rotating.png)
 
 Same as `Laser_Static`, but continuously rotates around its own y-axis.
 
@@ -184,19 +224,30 @@ Same as `Laser_Static`, but continuously rotates around its own y-axis.
 
 ### Laser_Rotatable
 
+![Laser_Rotatable](pics/Laser_Rotatable.png)
+
 Same as `Laser_Static`, but can be rotated.
 
 ### Laser_Rotatable_ShortHandle
 
+![Laser_Rotatable_ShortHandle](pics/Laser_Rotatable_ShortHandle.png)
+
 Same as `Laser_Rotatable`, but with a shorter handle.
 
 ### Repeaters
+
+![LaserRepeater_Static](pics/LaserRepeater_Static.png)
+![LaserRepeater_Rotating](pics/LaserRepeater_Rotating.png)
+![LaserRepeater_Rotatable](pics/LaserRepeater_Rotatable.png)
+![LaserRepeater_Rotatable_ShortHandle](pics/LaserRepeater_Rotatable_ShortHandle.png)
 
 The repeater versions of the laser.
 
 #### Features
 
 `Self-supplying` : If the repeater is hit by its own laser ray, it can still emit rays.
+
+![Self-supplying](pics/Self-supplying.png)
 
 ## Notes
 
