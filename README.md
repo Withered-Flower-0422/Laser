@@ -234,6 +234,15 @@ Same as `Laser_Static`, but can be rotated.
 
 Same as `Laser_Rotatable`, but with a shorter handle.
 
+### Laser_DHs
+
+![Laser_DH_Static](pics/Laser_DH_Static.png)
+![Laser_DH_Rotating](pics/Laser_DH_Rotating.png)
+![Laser_DH_Rotatable](pics/Laser_DH_Rotatable.png)
+![Laser_DH_Rotatable_ShortHandle](pics/Laser_DH_Rotatable_ShortHandle.png)
+
+The double-head versions of the laser. They emit two laser rays in both positive and negative z-axis direction of their own coordinate system.
+
 ### Repeaters
 
 ![LaserRepeater_Static](pics/LaserRepeater_Static.png)
@@ -242,6 +251,15 @@ Same as `Laser_Rotatable`, but with a shorter handle.
 ![LaserRepeater_Rotatable_ShortHandle](pics/LaserRepeater_Rotatable_ShortHandle.png)
 
 The repeater versions of the laser.
+
+### Splitters
+
+![LaserSplitter_Static](pics/LaserSplitter_Static.png)
+![LaserSplitter_Rotating](pics/LaserSplitter_Rotating.png)
+![LaserSplitter_Rotatable](pics/LaserSplitter_Rotatable.png)
+![LaserSplitter_Rotatable_ShortHandle](pics/LaserSplitter_Rotatable_ShortHandle.png)
+
+The repeater versions of the double-head laser.
 
 #### Features
 
