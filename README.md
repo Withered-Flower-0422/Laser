@@ -167,7 +167,7 @@ be locked again after the player dies. Otherwise, it will remain unlocked (if it
 
 ![Laser](pics/Laser.png)
 
-A pure laser that always emits laser rays in the positive z-axis direction of its own coordinate system.
+A pure laser that emits laser rays.
 
 #### Configuration
 
