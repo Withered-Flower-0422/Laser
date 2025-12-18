@@ -1,5 +1,7 @@
 # Laser Package
 
+<p align="center">
+
 This package contains the Laser-related Items for Ballex² and BME pro HDRP.
 
 [![](https://img.shields.io/badge/Steam-Ballex%C2%B2:%20The%20Hanging%20Gardens-235?style=flat)](https://store.steampowered.com/app/1383570/)
@@ -9,6 +11,10 @@ This package contains the Laser-related Items for Ballex² and BME pro HDRP.
 [![](https://img.shields.io/badge/Discord-5NygdBmksE-56e?style=flat)](https://discord.gg/5NygdBmksE/)
 
 [![](https://img.shields.io/github/license/Withered-Flower-0422/Laser)](https://github.com/Withered-Flower-0422/Laser/blob/main/LICENSE)
+
+English | [简体中文](README-zh.md)
+
+</p>
 
 > [!IMPORTANT]
 > The package is currently not uploaded. It will be available in the near future when more performance tests are done and `Unpack Assets` is ready.
