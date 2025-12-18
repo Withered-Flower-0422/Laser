@@ -163,6 +163,13 @@ The door will open permanently after being hit by the laser.
 If there is a `ResetOnDeath` tag in `Tags` in `Settings` component, the door will
 be locked again after the player dies. Otherwise, it will remain unlocked (if it had been unlocked before).
 
+### DestroyedByLaser
+
+![WoodenBall](pics/WoodenBall.png)
+
+A templated item that can be destroyed by the laser.
+You can change the destroy sfx in `AudioPlayer` component.
+
 ### Laser
 
 ![Laser](pics/Laser.png)
