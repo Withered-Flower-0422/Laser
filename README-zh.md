@@ -1,7 +1,5 @@
 # 激光资源包
 
-<center>
-
 该资源包包含激光相关的物品，供 Ballex² 和 BME pro HDRP 使用。
 
 [![](https://img.shields.io/badge/Steam-Ballex%C2%B2:%20The%20Hanging%20Gardens-235?style=flat)](https://store.steampowered.com/app/1383570/)
@@ -13,8 +11,6 @@
 [![](https://img.shields.io/github/license/Withered-Flower-0422/Laser)](https://github.com/Withered-Flower-0422/Laser/blob/main/LICENSE)
 
 [English](README.md) | 简体中文
-
-</center>
 
 > [!IMPORTANT]
 > 该资源包目前还未上传。当更多性能测试完成，且 `打包资源` 功能可用时，该资源包将会发布。
