@@ -1,6 +1,6 @@
 # 激光资源包
 
-<p align="center">
+<center>
 
 该资源包包含激光相关的物品，供 Ballex² 和 BME pro HDRP 使用。
 
@@ -14,7 +14,7 @@
 
 [English](README.md) | 简体中文
 
-</p>
+</center>
 
 > [!IMPORTANT]
 > 该资源包目前还未上传。当更多性能测试完成，且 `打包资源` 功能可用时，该资源包将会发布。

@@ -1,6 +1,6 @@
 # Laser Package
 
-<p align="center">
+<center>
 
 This package contains the Laser-related Items for Ballex² and BME pro HDRP.
 
@@ -14,7 +14,7 @@ This package contains the Laser-related Items for Ballex² and BME pro HDRP.
 
 English | [简体中文](README-zh.md)
 
-</p>
+</center>
 
 > [!IMPORTANT]
 > The package is currently not uploaded. It will be available in the near future when more performance tests are done and `Unpack Assets` is ready.
