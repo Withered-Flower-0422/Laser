@@ -166,7 +166,7 @@
 
 ![WoodenBall](pics/WoodenBall.png)
 
-一个可以被激光摧毁的模板元件。
+一个可以被激光摧毁的模板元件。（只有当激光的 `canDestroyItem` 设置为真时才可以摧毁元件）
 你可以在 `音频播放器` 组件中设置其摧毁音效。
 
 ### 激光
@@ -185,6 +185,7 @@
 | `heatFactor`         |     float      |           2           | 如果玩家被激光击中，每帧所增加的温度。                                                               |
 | `chargeFactor`       |     float      |          0.5          | 如果玩家被激光击中，每帧所增加的电力。                                                               |
 | `dryFactor`          |     float      |          0.5          | 如果玩家被激光击中，每帧所减少的湿度。                                                               |
+| `canDestroyItem`     |      bool      |         true          | 是否可以摧毁拥有 `DestroyedByLaser` 脚本的元件。                                                     |
 | `material`           | AssetReference |  SwitcherGlow_Purple  | 激光光束的材质。                                                                                     |
 | `thickness`          |     float      |           1           | 激光光束的厚度因子。                                                                                 |
 | `stopUpdateDistance` |     float      |          50           | 如果激光和玩家之间的距离大于这个值，激光将停止更新。如果值为负，激光将始终更新。_用于优化性能_       |

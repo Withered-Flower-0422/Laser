@@ -169,7 +169,7 @@ be locked again after the player dies. Otherwise, it will remain unlocked (if it
 
 ![WoodenBall](pics/WoodenBall.png)
 
-A templated item that can be destroyed by the laser.
+A templated item that can be destroyed by the laser with `canDestroyItem` set to true.
 You can change the destroy sfx in `AudioPlayer` component.
 
 ### Laser
@@ -188,6 +188,7 @@ A pure laser that emits laser rays.
 | `heatFactor`         |     float      |           2           | The temperature added to the player per frame if player is hit by the laser.                                                                                                                                             |
 | `chargeFactor`       |     float      |          0.5          | The power added to the player per frame if player is hit by the laser.                                                                                                                                                   |
 | `dryFactor`          |     float      |          0.5          | The humidity subtracted from the player per frame if player is hit by the laser.                                                                                                                                         |
+| `canDestroyItem`     |      bool      |         true          | If true, the laser can destroy items with `DestroyedByLaser` script.                                                                                                                                                     |
 | `material`           | AssetReference |  SwitcherGlow_Purple  | The material of the laser rays.                                                                                                                                                                                          |
 | `thickness`          |     float      |           1           | The thickness factor of the laser rays.                                                                                                                                                                                  |
 | `stopUpdateDistance` |     float      |          50           | If the distance between the laser and the player is larger than this value, the laser will stop being updated. If the value is negative, the laser will always be updated. _This is for sake of optimizing performance._ |
