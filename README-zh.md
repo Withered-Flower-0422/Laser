@@ -167,6 +167,7 @@
 ![WoodenBall](pics/WoodenBall.png)
 
 一个可以被激光摧毁的模板元件。（只有当激光的 `canDestroyItem` 设置为真时才可以摧毁元件）
+
 你可以在 `音频播放器` 组件中设置其摧毁音效。
 
 ### 激光

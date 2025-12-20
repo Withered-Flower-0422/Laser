@@ -170,6 +170,7 @@ be locked again after the player dies. Otherwise, it will remain unlocked (if it
 ![WoodenBall](pics/WoodenBall.png)
 
 A templated item that can be destroyed by the laser with `canDestroyItem` set to true.
+
 You can change the destroy sfx in `AudioPlayer` component.
 
 ### Laser
