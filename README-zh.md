@@ -51,7 +51,9 @@
 ![StickyBall](pics/StickyBall.png)
 ![SpongeBall](pics/SpongeBall.png)
 
-和官方球类相同，但可以受到激光力的影响。`钢球` 还会反射激光。
+和官方球类相同，但可以受到激光力的影响。
+
+特别地，`冰球` 将忽略激光，`钢球` 会反射激光。
 
 ### 箱子
 

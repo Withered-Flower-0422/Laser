@@ -51,7 +51,9 @@ Tags only work for **non-link** items.
 ![StickyBall](pics/StickyBall.png)
 ![SpongeBall](pics/SpongeBall.png)
 
-Same as the official balls, but affected by the laser force. The `SteelBall` also reflects the laser specially.
+Same as the official balls, but affected by the laser force.
+
+In particular, the `IceBall` ignores the laser and the `SteelBall` reflects the laser.
 
 ### Box
 
