@@ -12,18 +12,18 @@ This package contains the Laser-related Items for Ballex² and BME pro HDRP.
 
 English | [简体中文](README-zh.md)
 
-> [!IMPORTANT]
-> The package is currently not uploaded. It will be available in the near future when more performance tests are done and `Unpack Assets` is ready.
-
 ## Usage
 
 ### Installation
 
-Click `File → Unpack Assets` in the menu bar to install the package, then restart BME.
+Put the whole `Assets` folder in `%USERPROFILE%\AppData\LocalLow\Mushreb\BME Pro HDRP`.
 
 ### Enabling Laser
 
 Click `Scripts → Enable Laser` in the menu bar to enable the Laser system for the current scene.
+
+> [!TIP]
+> If there is no `Scripts → Enable Laser` in the menu bar, please restart BME.
 
 ### Tags
 
