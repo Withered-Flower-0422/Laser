@@ -18,7 +18,7 @@ export const onEvents = (self, { OnPlayerDeadEnd, OnStartLevel, OnPhysicsUpdate 
         renderer.setData({ Materials: originalMat });
     }
     if (active && OnPhysicsUpdate) {
-        if (Laser.getCastedLasers(self).some(l => l.canDestroyItem)) {
+        if (Laser.getCastedLasers(self).some(l => l.tags.includes("CanDestroyItem"))) {
             active = false;
             audioPlayer.play();
             renderer.setData({ Materials: [] });

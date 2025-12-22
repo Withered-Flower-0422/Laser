@@ -103,7 +103,7 @@ export class Ray {
 }
 export class Laser {
     material;
-    canDestroyItem;
+    tags;
     static instances;
     static {
         const instances = variables.get(LASER_INSTANCES);
@@ -130,9 +130,9 @@ export class Laser {
     }
     rays = [];
     hurtUI;
-    constructor(material, canDestroyItem, enableUI = true, pushToInstances = true) {
+    constructor(material, tags = [], enableUI = true, pushToInstances = true) {
         this.material = material;
-        this.canDestroyItem = canDestroyItem;
+        this.tags = tags;
         if (enableUI)
             this.hurtUI = createHurtUI();
         if (pushToInstances)

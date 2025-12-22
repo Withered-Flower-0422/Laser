@@ -27,11 +27,20 @@ Click `Scripts → Enable Laser` in the menu bar to enable the Laser system for 
 
 ### Tags
 
-Tags only work for **non-link** items.
+#### Tags for Items
+
+These tags only work for **non-link** items.
 
 -   `AffectedByLaserForce`: Only a **rigid** item with this tag can be affected by the laser force.
 -   `ReflectLaser`: An item with this tag will reflect the laser.
 -   `IgnoreLaser`: An item with this tag will be ignored by the laser.
+
+#### Tags for Lasers
+
+These tags should be added to `Laser_Head` sub-items.
+
+- `CanDestroyItem`: A laser with this tag can destroy items with `DestroyedByLaser` script.
+
 
 > [!WARNING]
 > The laser system has occupied the `LaserInstances` variable name in the `variables` module.
@@ -171,7 +180,7 @@ be locked again after the player dies. Otherwise, it will remain unlocked (if it
 
 ![WoodenBall](pics/WoodenBall.png)
 
-A templated item that can be destroyed by the laser with `canDestroyItem` set to true.
+A templated item that can be destroyed by the laser with `CanDestroyItem` tag.
 
 You can change the destroy sfx in `AudioPlayer` component.
 
@@ -191,7 +200,6 @@ A pure laser that emits laser rays.
 | `heatFactor`         |     float      |           2           | The temperature added to the player per frame if player is hit by the laser.                                                                                                                                             |
 | `chargeFactor`       |     float      |          0.5          | The power added to the player per frame if player is hit by the laser.                                                                                                                                                   |
 | `dryFactor`          |     float      |          0.5          | The humidity subtracted from the player per frame if player is hit by the laser.                                                                                                                                         |
-| `canDestroyItem`     |      bool      |         true          | If true, the laser can destroy items with `DestroyedByLaser` script.                                                                                                                                                     |
 | `material`           | AssetReference |  SwitcherGlow_Purple  | The material of the laser rays.                                                                                                                                                                                          |
 | `thickness`          |     float      |           1           | The thickness factor of the laser rays.                                                                                                                                                                                  |
 | `stopUpdateDistance` |     float      |          50           | If the distance between the laser and the player is larger than this value, the laser will stop being updated. If the value is negative, the laser will always be updated. _This is for sake of optimizing performance._ |

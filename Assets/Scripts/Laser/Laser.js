@@ -38,7 +38,7 @@ export const init = (self, v) => {
         lasers.push({
             vector: math.normalizeFloat3(offset),
             maxDistance: math.lengthFloat3(offset),
-            laser: new Laser(material, canDestroyItem, !bake, !bake),
+            laser: new Laser(material, self.getComponent("Settings").getData("Tags"), !bake, !bake),
         });
 };
 export const registerEvents = ["OnStartLevel", "OnPlayerDeadEnd", "OnPhysicsUpdate"];
