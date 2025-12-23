@@ -194,7 +194,7 @@
 | `endPosOffsets`      |    Float3[]    | [{x: 0, y: 0, z: 30}] | 每个 Float3 代表一束激光。激光的方向和最大行进距离取决于 Float3 的方向和长度。                       |
 | `force`              | [float, float] |       [0.5, 1]        | 施加到拥有 `AffectedByLaserForce` 标签的 **刚体** 元件上的线性（第一个元素）和角度（第二个元素）力。 |
 | `damageTable`        |    float[]     |       _见下表_        | 如果玩家被激光击中，每帧所受的伤害。                                                                 |
-| `heatFactor`         |     float      |           2           | 如果玩家被激光击中，每帧所增加的温度。_该值会根据玩家现有温度衰减_                                   |
+| `heatFactor`         |     float      |           2           | 如果玩家被激光击中，每帧所增加的温度。_该值会根据玩家现有温度改变_                                   |
 | `chargeFactor`       |     float      |          0.5          | 如果玩家被激光击中，每帧所增加的电力。                                                               |
 | `dryFactor`          |     float      |          0.5          | 如果玩家被激光击中，每帧所减少的湿度。_如果玩家温度小于-20，湿度将被锁定_                            |
 | `material`           | AssetReference |  SwitcherGlow_Purple  | 激光光束的材质。                                                                                     |
