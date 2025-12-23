@@ -39,8 +39,7 @@ These tags only work for **non-link** items.
 
 These tags should be added to `Laser_Head` sub-items.
 
-- `CanDestroyItem`: A laser with this tag can destroy items with `DestroyedByLaser` script.
-
+-   `CanDestroyItem`: A laser with this tag can destroy items with `DestroyedByLaser` script.
 
 > [!WARNING]
 > The laser system has occupied the `LaserInstances` variable name in the `variables` module.
@@ -197,13 +196,13 @@ A pure laser that emits laser rays.
 | `endPosOffsets`      |    Float3[]    | [{x: 0, y: 0, z: 30}] | Each Float3 represents a ray, whose direction and maximum distance can travel depend on the Float3's direction and length.                                                                                               |
 | `force`              | [float, float] |       [0.5, 1]        | The linear (first element) and angular (second element) forces applied to the **rigid** items **with `AffectedByLaserForce` tag** hit by the laser.                                                                      |
 | `damageTable`        |    float[]     |      _see below_      | The damage inflicted on player per frame if player is hit by the laser.                                                                                                                                                  |
-| `heatFactor`         |     float      |           2           | The temperature added to the player per frame if player is hit by the laser.                                                                                                                                             |
+| `heatFactor`         |     float      |           2           | The temperature added to the player per frame if player is hit by the laser. _The value decays according to player's current temperature._                                                                               |
 | `chargeFactor`       |     float      |          0.5          | The power added to the player per frame if player is hit by the laser.                                                                                                                                                   |
-| `dryFactor`          |     float      |          0.5          | The humidity subtracted from the player per frame if player is hit by the laser.                                                                                                                                         |
+| `dryFactor`          |     float      |          0.5          | The humidity subtracted from the player per frame if player is hit by the laser. _If the temperature of player is lower than -20, the wetness is locked._                                                                |
 | `material`           | AssetReference |  SwitcherGlow_Purple  | The material of the laser rays.                                                                                                                                                                                          |
 | `thickness`          |     float      |           1           | The thickness factor of the laser rays.                                                                                                                                                                                  |
 | `stopUpdateDistance` |     float      |          50           | If the distance between the laser and the player is larger than this value, the laser will stop being updated. If the value is negative, the laser will always be updated. _This is for sake of optimizing performance._ |
-| `halfSample`         |      bool      |         true          | If true, the laser will be updated every other frame. _This is for sake of optimizing performance_.                                                                                                                      |
+| `halfSample`         |      bool      |         true          | If true, the laser will be updated every other frame. _This is for sake of optimizing performance._                                                                                                                      |
 | `asRepeater`         |      bool      |         false         | If true, the laser won't emit rays unless itself is hit by any laser ray.                                                                                                                                                |
 | `bake`               |      bool      |         false         | If true, the laser will be baked and never be updated or affect other items during gameplay. _This is for decoration._                                                                                                   |
 
