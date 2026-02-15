@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { player, scene, math, levelManager } from "gameApi";
 import Laser, { createHurtUI } from "Scripts/Laser/LaserClass.js";
 import mathEx from "Scripts/Utility/mathEx.js";
@@ -52,17 +53,24 @@ const explode = (self) => {
             physicsObject.setLinearVelocity(mathEx.addFloat3(physicsObject.getLinearVelocity(), mathEx.scaleFloat3(math.normalizeFloat3(mathEx.subFloat3(itemPos, selfPos)), explodeForce / disFactor / physicsObject.getMass())));
             if (item.guid === player.guid) {
                 hurtUI.alpha = 0.24;
-                player.durability -= (damageTable[player.ballType] ?? damageTable.Default) / disFactor;
+                player.durability -=
+                    (damageTable[player.ballType] ?? damageTable.Default) /
+                        disFactor;
             }
         }
     }
 };
 export const onCollide = (self, { impulse, itemB: { guid } }) => {
     if (active &&
-        (impulse > explodeImpulseRequire || (guid === player.guid && player.temperature > explodeTempRequire)))
+        (impulse > explodeImpulseRequire ||
+            (guid === player.guid && player.temperature > explodeTempRequire)))
         explode(self);
 };
-export const registerEvents = ["OnStartLevel", "OnPlayerDeadEnd", "OnPhysicsUpdate"];
+export const registerEvents = [
+    "OnStartLevel",
+    "OnPlayerDeadEnd",
+    "OnPhysicsUpdate",
+];
 export const onEvents = (self, { OnPlayerDeadEnd, OnStartLevel, OnPhysicsUpdate }) => {
     if (OnStartLevel || OnPlayerDeadEnd) {
         active = true;

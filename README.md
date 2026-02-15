@@ -31,15 +31,15 @@ Click `Scripts → Enable Laser` in the menu bar to enable the Laser system for 
 
 These tags only work for **non-link** items.
 
--   `AffectedByLaserForce`: Only a **rigid** item with this tag can be affected by the laser force.
--   `ReflectLaser`: An item with this tag will reflect the laser.
--   `IgnoreLaser`: An item with this tag will be ignored by the laser.
+- `AffectedByLaserForce`: Only a **rigid** item with this tag can be affected by the laser force.
+- `ReflectLaser`: An item with this tag will reflect the laser.
+- `IgnoreLaser`: An item with this tag will be ignored by the laser.
 
 #### Tags for Lasers
 
 These tags should be added to `Laser_Head` sub-items.
 
--   `CanDestroyItem`: A laser with this tag can destroy items with `DestroyedByLaser` script.
+- `CanDestroyItem`: A laser with this tag can destroy items with `DestroyedByLaser` script.
 
 > [!WARNING]
 > The laser system has occupied the `LaserInstances` variable name in the `variables` module.
@@ -289,11 +289,11 @@ The repeater versions of the double-head laser.
 
 ## Notes
 
--   The `Laser` items are quite "heavy", so use them sparingly.
--   Try not to use `Laser_Rotating` excessively. Static lasers have cache mechanisms to ensure their performance, but an always-rotating laser cannot enjoy the same benefits.
--   Try not to let the laser reflect excessively. Reflecting consumptions are quite high.
--   It is recommended to arrange no more than four lasers within a section, as the performance may degrade significantly.
--   Extend the distance between sections which have lasers as much as possible so that the lasers in previous sections don't get updated (if `stopUpdateDistance` works) to optimize performance.
+- The `Laser` items are quite "heavy", so use them sparingly.
+- Try not to use `Laser_Rotating` excessively. Static lasers have cache mechanisms to ensure their performance, but an always-rotating laser cannot enjoy the same benefits.
+- Try not to let the laser reflect excessively. Reflecting consumptions are quite high.
+- It is recommended to arrange no more than four lasers within a section, as the performance may degrade significantly.
+- Extend the distance between sections which have lasers as much as possible so that the lasers in previous sections don't get updated (if `stopUpdateDistance` works) to optimize performance.
 
 ## License
 

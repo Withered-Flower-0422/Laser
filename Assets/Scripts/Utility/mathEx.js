@@ -1,5 +1,7 @@
+// @ts-nocheck
 import { math, Float3, Quaternion } from "gameApi";
-export var mathEx;
+export { mathEx };
+var mathEx;
 (function (mathEx) {
     mathEx.PI = Math.PI;
     mathEx.TWO_PI = Math.PI * 2;
@@ -127,7 +129,10 @@ export var mathEx;
         const s = Math.sqrt(1 - w * w);
         if (s < 1e-9)
             return { axis: new Float3(0, 1, 0), angle: 0 };
-        return { axis: new Float3(x / s, y / s, z / s), angle: 2 * Math.acos(w) };
+        return {
+            axis: new Float3(x / s, y / s, z / s),
+            angle: 2 * Math.acos(w),
+        };
     };
     mathEx.rotPosAroundAxis = (currentPos, pivot, axis, angle) => mathEx.addFloat3(pivot, mathEx.transFloat3WithQuat(mathEx.subFloat3(currentPos, pivot), mathEx.axisAngleToQuaternion(axis, angle)));
     mathEx.rotQuatAroundAxis = (currentQuat, axis, angle) => mathEx.mulQuaternion(mathEx.axisAngleToQuaternion(axis, angle), currentQuat);

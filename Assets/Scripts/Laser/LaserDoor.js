@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { scene } from "gameApi";
 import Laser from "Scripts/Laser/LaserClass.js";
 export const init = (self, v) => Object.assign(globalThis, v);
@@ -19,11 +20,19 @@ let unlockLastTime = 0;
 let renderer;
 let audioPlayer;
 let physicsObject;
-export const registerEvents = ["OnLoadLevel", "OnPhysicsUpdate"];
+export const registerEvents = [
+    "OnLoadLevel",
+    "OnPhysicsUpdate",
+];
 export const onEvents = (self, { OnLoadLevel, OnPhysicsUpdate }) => {
     if (OnLoadLevel) {
         unlockLastTime =
-            typeof door === "undefined" ? 100 : +scene.getItem(door).getComponent("Settings").getData("Tags")[0];
+            typeof door === "undefined"
+                ? 100
+                : +scene
+                    .getItem(door)
+                    .getComponent("Settings")
+                    .getData("Tags")[0];
         renderer = self.getComponent("Renderer");
         audioPlayer = self.getComponent("AudioPlayer");
         physicsObject = self.getComponent("PhysicsObject");

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { scene, math, Float3 } from "gameApi";
 import mathEx from "Scripts/Utility/mathEx.js";
 export const init = (self, v) => Object.assign(globalThis, v);
@@ -12,7 +13,7 @@ export const registerEvents = [
     "OnPhysicsUpdate",
     "OnPlayerDeadEnd",
 ];
-export const onEvents = (self, { OnLoadLevel, OnTimerActive, OnPhysicsUpdate, OnPlayerDeadEnd, OnStartLevel }) => {
+export const onEvents = (self, { OnLoadLevel, OnTimerActive, OnPhysicsUpdate, OnPlayerDeadEnd, OnStartLevel, }) => {
     if (OnLoadLevel) {
         laser = scene.getItem(laserItem);
         initialRotQuat = laser.getRotationQuaternion();

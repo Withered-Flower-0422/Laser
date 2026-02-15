@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { scene, player } from "gameApi";
 let handleItem;
 let handlePhysicsObject;
@@ -14,8 +15,8 @@ export const onTrigger = (self, triggeredItem, type) => {
     }
 };
 export const registerEvents = ["OnLoadLevel"];
-export const onEvents = (self, events) => {
-    if (events.OnLoadLevel) {
+export const onEvents = (self, { OnLoadLevel }) => {
+    if (OnLoadLevel) {
         handleItem = scene.getItem(handle);
         handlePhysicsObject = handleItem.getComponent("PhysicsObject");
         initialMass = handlePhysicsObject.getMass();

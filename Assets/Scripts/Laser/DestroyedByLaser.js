@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Laser from "Scripts/Laser/LaserClass.js";
 import { levelManager } from "gameApi";
 let active = true;
@@ -11,7 +12,11 @@ export const init = (self, v) => {
     physicsObject = self.getComponent("PhysicsObject");
     originalMat = renderer.getData("Materials");
 };
-export const registerEvents = ["OnStartLevel", "OnPlayerDeadEnd", "OnPhysicsUpdate"];
+export const registerEvents = [
+    "OnStartLevel",
+    "OnPlayerDeadEnd",
+    "OnPhysicsUpdate",
+];
 export const onEvents = (self, { OnPlayerDeadEnd, OnStartLevel, OnPhysicsUpdate }) => {
     if (OnStartLevel || OnPlayerDeadEnd) {
         active = true;

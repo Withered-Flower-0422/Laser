@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { editor, file, scene, dialogWindowManager, Float2 } from "editorApi";
 const addHurtUITexAsset = () => {
     const path = "Textures/Screen/Screen_Red.tex";
@@ -19,7 +20,8 @@ const createRayTemplate = () => {
     for (const obj of scene.getAllObjects()) {
         if (obj.type !== "Item")
             continue;
-        if (JSON.parse(obj.getComponent("Settings").getData()).TemplateName === "LaserRay")
+        if (JSON.parse(obj.getComponent("Settings").getData())
+            .TemplateName === "LaserRay")
             res.push(obj);
     }
     if (res.length === 0) {
@@ -47,18 +49,20 @@ const createRayTemplate = () => {
 export const menuPath = editor.language === "Chinese" ? "启用激光" : "Enable Laser";
 export const execute = () => {
     if (!addHurtUITexAsset()) {
-        dialogWindowManager.openMessageDialog(editor.language === "Chinese" ? "启用激光" : "Enable Laser", editor.language === "Chinese"
+        dialogWindowManager.openMessageDialog(menuPath, editor.language === "Chinese"
             ? '"Screen_Red.tex" 材质文件不存在，请将其添加到 "Assets/Textures/Screen/" 文件夹中。'
             : '"Screen_Red.tex" not found. Please add it to "Assets/Textures/Screen/" folder.', editor.language === "Chinese" ? "确认" : "Ok", () => { });
         return;
     }
     const rays = createRayTemplate();
     if (rays.length > 1) {
-        dialogWindowManager.openMessageDialog(editor.language === "Chinese" ? "启用激光" : "Enable Laser", editor.language === "Chinese"
+        dialogWindowManager.openMessageDialog(menuPath, editor.language === "Chinese"
             ? "检测到场景中存在多个激光模板，请删除多余的模板。"
             : "Detected more than one LaserRay template in the scene. Please remove the extra ones.", editor.language === "Chinese" ? "确认" : "Ok", () => { });
     }
     else {
-        dialogWindowManager.openMessageDialog(editor.language === "Chinese" ? "启用激光" : "Enable Laser", editor.language === "Chinese" ? "激光已启用。" : "Laser has been enabled.", editor.language === "Chinese" ? "确认" : "Ok", () => { });
+        dialogWindowManager.openMessageDialog(menuPath, editor.language === "Chinese"
+            ? "激光已启用。"
+            : "Laser has been enabled.", editor.language === "Chinese" ? "确认" : "Ok", () => { });
     }
 };

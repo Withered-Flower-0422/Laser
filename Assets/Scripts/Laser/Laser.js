@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { player, math, levelManager } from "gameApi";
 import mathEx from "Scripts/Utility/mathEx.js";
 import Laser from "Scripts/Laser/LaserClass.js";
@@ -41,7 +42,11 @@ export const init = (self, v) => {
             laser: new Laser(material, self.getComponent("Settings").getData("Tags"), !bake, !bake),
         });
 };
-export const registerEvents = ["OnStartLevel", "OnPlayerDeadEnd", "OnPhysicsUpdate"];
+export const registerEvents = [
+    "OnStartLevel",
+    "OnPlayerDeadEnd",
+    "OnPhysicsUpdate",
+];
 let uiAlphaFactor = 1;
 let uiAnimeSpeed = 1;
 let sample = Math.random() > 0.5;
@@ -64,7 +69,8 @@ export const onEvents = (self, { OnPhysicsUpdate, OnPlayerDeadEnd, OnStartLevel 
             lasers.forEach(({ laser }) => laser.clearRays());
         if (OnPhysicsUpdate) {
             if (levelManager.timerEnabled &&
-                math.distanceFloat3(player.position, self.getTransform()[0]) > stopUpdateDistance) {
+                math.distanceFloat3(player.position, self.getTransform()[0]) >
+                    stopUpdateDistance) {
                 for (const { laser } of lasers)
                     if (!laser.frozen)
                         laser.freeze();
@@ -79,11 +85,16 @@ export const onEvents = (self, { OnPhysicsUpdate, OnPlayerDeadEnd, OnStartLevel 
             const selfPos = self.getTransform()[0];
             const selfRot = self.getRotationQuaternion();
             for (const { vector, maxDistance, laser } of lasers) {
-                laser.updateRays(selfPos, mathEx.transFloat3WithQuat(vector, selfRot), asRepeater ? (Laser.isCasted(self) ? maxDistance : 0) : maxDistance, thickness);
+                laser.updateRays(selfPos, mathEx.transFloat3WithQuat(vector, selfRot), asRepeater
+                    ? Laser.isCasted(self)
+                        ? maxDistance
+                        : 0
+                    : maxDistance, thickness);
                 laser.applyForce(...force);
                 if (!player.ballType)
                     return;
-                laser.updatePlayerStates(damageTable[player.ballType] ?? damageTable.Default, heatFactor > 0
+                laser.updatePlayerStates(damageTable[player.ballType] ??
+                    damageTable.Default, heatFactor > 0
                     ? heatFactor * ((600 - player.temperature) / 300)
                     : heatFactor * ((player.temperature + 120) / 80), chargeFactor, player.temperature > -20 ? dryFactor : 0, uiAlphaFactor, uiAnimeSpeed);
             }

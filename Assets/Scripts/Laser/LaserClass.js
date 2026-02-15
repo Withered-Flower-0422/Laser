@@ -1,4 +1,5 @@
-import { player, scene, uiCanvas, variables, math, Float2, Float3 } from "gameApi";
+// @ts-nocheck
+import { player, scene, uiCanvas, variables, math, Float2, Float3, } from "gameApi";
 import mathEx from "Scripts/Utility/mathEx.js";
 const LASER_INSTANCES = "LaserInstances";
 const unitZFloat3 = new Float3(0, 0, 1);
@@ -17,11 +18,17 @@ const laserCast = (startPos, endPos) => scene
 const ignoreLaserCache = {};
 const isIgnoreLaser = (item) => item.guid === player.guid
     ? player.ballType === "IceBall"
-    : (ignoreLaserCache[item.guid] ??= item.getComponent("Settings").getData("Tags").includes("IgnoreLaser"));
+    : (ignoreLaserCache[item.guid] ??= item
+        .getComponent("Settings")
+        .getData("Tags")
+        .includes("IgnoreLaser"));
 const reflectLaserCache = {};
 const isReflectLaser = (item) => item.guid === player.guid
     ? player.ballType === "SteelBall"
-    : (reflectLaserCache[item.guid] ??= item.getComponent("Settings").getData("Tags").includes("ReflectLaser"));
+    : (reflectLaserCache[item.guid] ??= item
+        .getComponent("Settings")
+        .getData("Tags")
+        .includes("ReflectLaser"));
 const affectedByLaserForceCache = {};
 const isAffectedByLaserForce = (item) => item.guid === player.guid
     ? true
@@ -70,15 +77,20 @@ export class Ray {
         this._endPos = endPos;
         this._castItem = castItem;
         this.rayItem = scene.createItem("LaserRay", ...calRayTransform(startPos, endPos, thickness));
-        this.rayItem.getComponent("Renderer").setData({ Materials: [material] });
+        this.rayItem
+            .getComponent("Renderer")
+            .setData({ Materials: [material] });
     }
     isCasted(item) {
-        return this._enabled && !this._destroyed && this._castItem?.guid === item.guid;
+        return (this._enabled &&
+            !this._destroyed &&
+            this._castItem?.guid === item.guid);
     }
     hasSameStartAndEndPos(startPos, endPos, threshold = 1e-3) {
         if (!this._enabled || this._destroyed)
             return false;
-        return isSamePos(this.startPos, startPos, threshold) && isSamePos(this.endPos, endPos, threshold);
+        return (isSamePos(this.startPos, startPos, threshold) &&
+            isSamePos(this.endPos, endPos, threshold));
     }
     updateCastItem(castItem) {
         this._castItem = castItem;
@@ -174,6 +186,8 @@ export class Laser {
             const ray = this.rays[i];
             if (ray.enabled)
                 ray.disable();
+            // The laser is continuous, once a ray is disabled,
+            // all the following rays will be disabled, so we just break the loop.
             else
                 break;
         }
@@ -242,7 +256,9 @@ export class Laser {
         return !this.frozen && this.rays.some(ray => ray.isCasted(item));
     }
     countCasted(item) {
-        return this.frozen ? 0 : this.rays.filter(ray => ray.isCasted(item)).length;
+        return this.frozen
+            ? 0
+            : this.rays.filter(ray => ray.isCasted(item)).length;
     }
     clearRays() {
         for (const r of this.rays)

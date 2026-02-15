@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { scene } from "gameApi";
 import Laser from "Scripts/Laser/LaserClass.js";
 let unlockSound;
@@ -14,7 +15,11 @@ export const init = (self, v) => {
     renderer = scene.getItem(pic).getComponent("Renderer");
     joint = self.getComponent("Joint");
     preMat = renderer.getData("Materials")[0];
-    resetOnDeath = scene.getItem(door).getComponent("Settings").getData("Tags").includes("ResetOnDeath");
+    resetOnDeath = scene
+        .getItem(door)
+        .getComponent("Settings")
+        .getData("Tags")
+        .includes("ResetOnDeath");
     doorItems = scene.getItems(doors);
 };
 export const registerEvents = [

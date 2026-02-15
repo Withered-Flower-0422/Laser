@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { player } from "gameApi";
 let initialMass;
 let handlePhysicsObject;
@@ -18,13 +19,16 @@ export const onTrigger = (self, triggeredItem, type) => {
         }
     }
 };
-export const registerEvents = ["OnLoadLevel", "OnTimerActive"];
-export const onEvents = (self, events) => {
-    if (events.OnLoadLevel) {
+export const registerEvents = [
+    "OnLoadLevel",
+    "OnTimerActive",
+];
+export const onEvents = (self, { OnLoadLevel, OnTimerActive }) => {
+    if (OnLoadLevel) {
         handlePhysicsObject = self.getComponent("PhysicsObject");
         initialMass = handlePhysicsObject.getMass();
     }
-    if (events.OnTimerActive) {
+    if (OnTimerActive) {
         handlePhysicsObject.setMass(initialMass);
     }
 };
