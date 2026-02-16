@@ -142,9 +142,11 @@ export class Laser {
     }
     rays = [];
     hurtUI;
-    constructor(material, tags = [], enableUI = true, pushToInstances = true) {
+    constructor(material, tags = [], enableUI, pushToInstances) {
         this.material = material;
         this.tags = tags;
+        enableUI ??= true;
+        pushToInstances ??= true;
         if (enableUI)
             this.hurtUI = createHurtUI();
         if (pushToInstances)
