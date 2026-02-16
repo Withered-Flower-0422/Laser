@@ -42,7 +42,7 @@ export declare class Ray implements RayData {
      * @param threshold - The threshold of the distance, defaults to 1e-3.
      * @returns Whether the ray has the same start and end position with the given positions.
      */
-    hasSameStartAndEndPos(startPos: Float3, endPos: Float3, threshold?: number): boolean;
+    hasSameStartAndEndPos(startPos: Float3, endPos: Float3, threshold?: float): boolean;
     /**
      * Updates the cast item of the ray.
      * @param castItem - The new cast item of the ray.
@@ -71,7 +71,6 @@ export declare class Ray implements RayData {
 }
 export declare class Laser {
     readonly material: MaterialPath;
-    readonly tags: readonly string[];
     private static instances;
     /**
      * Checks whether the item or player is casted by any laser.
@@ -102,6 +101,7 @@ export declare class Laser {
     get frozen(): boolean;
     private readonly rays;
     private readonly hurtUI?;
+    readonly tags: readonly string[];
     /**
      * Creates a `Laser` instance.
      * @param material - The material of the rays.

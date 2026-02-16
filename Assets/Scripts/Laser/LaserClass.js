@@ -10,7 +10,7 @@ const calRayTransform = (startPos, endPos, thickness) => [
     math.quaternionToFloat3(mathEx.getQuatFromAxes(unitZFloat3, mathEx.subFloat3(endPos, startPos))),
     new Float3(thickness, thickness, math.distanceFloat3(startPos, endPos)),
 ];
-const isSamePos = (a, b, threshold = 1e-3) => math.distanceFloat3(a, b) < threshold;
+const isSamePos = (a, b, threshold) => math.distanceFloat3(a, b) < (threshold ?? 1e-3);
 const laserCast = (startPos, endPos) => scene
     .raycastAll(startPos, endPos)
     .sort(({ fraction: f1 }, { fraction: f2 }) => f1 - f2)
@@ -86,7 +86,8 @@ export class Ray {
             !this._destroyed &&
             this._castItem?.guid === item.guid);
     }
-    hasSameStartAndEndPos(startPos, endPos, threshold = 1e-3) {
+    hasSameStartAndEndPos(startPos, endPos, threshold) {
+        threshold ??= 1e-3;
         if (!this._enabled || this._destroyed)
             return false;
         return (isSamePos(this.startPos, startPos, threshold) &&
@@ -115,7 +116,6 @@ export class Ray {
 }
 export class Laser {
     material;
-    tags;
     static instances;
     static {
         const instances = variables.get(LASER_INSTANCES);
@@ -142,9 +142,10 @@ export class Laser {
     }
     rays = [];
     hurtUI;
-    constructor(material, tags = [], enableUI, pushToInstances) {
+    tags;
+    constructor(material, tags, enableUI, pushToInstances) {
         this.material = material;
-        this.tags = tags;
+        this.tags = tags ?? [];
         enableUI ??= true;
         pushToInstances ??= true;
         if (enableUI)
@@ -230,7 +231,9 @@ export class Laser {
             physicsObject.setVelocity(linear, angular);
         }
     }
-    updatePlayerStates(damage, heat, charge, dry, uiAlphaFactor = 1, uiAnimeSpeed = 1) {
+    updatePlayerStates(damage, heat, charge, dry, uiAlphaFactor, uiAnimeSpeed) {
+        uiAlphaFactor ??= 1;
+        uiAnimeSpeed ??= 1;
         const castCnt = this.countCasted(player);
         if (castCnt > 0) {
             player.durability -= damage * castCnt;

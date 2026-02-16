@@ -93,8 +93,7 @@ export const onEvents = (self, { OnPhysicsUpdate, OnPlayerDeadEnd, OnStartLevel 
                 laser.applyForce(...force);
                 if (!player.ballType)
                     return;
-                laser.updatePlayerStates(damageTable[player.ballType] ??
-                    damageTable.Default, heatFactor > 0
+                laser.updatePlayerStates(damageTable[player.ballType] ?? damageTable.Default, heatFactor > 0
                     ? heatFactor * ((600 - player.temperature) / 300)
                     : heatFactor * ((player.temperature + 120) / 80), chargeFactor, player.temperature > -20 ? dryFactor : 0, uiAlphaFactor, uiAnimeSpeed);
             }
