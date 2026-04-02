@@ -2,12 +2,6 @@
 import { editor, file, scene, dialogWindowManager, Float2 } from "editorApi";
 
 
-
-
-
-
-
-
 const addHurtUITexAsset = () => {
   const path = "Textures/Screen/Screen_Red.tex";
   if (!file.exist(`${file.dataDirectoryPath}/Assets/${path}`)) return false;
@@ -30,8 +24,8 @@ const createRayTemplate = () => {
   for (const obj of scene.getAllObjects()) {
     if (obj.type !== "Item") continue;
     if (
-    JSON.parse(obj.getComponent("Settings").getData()).
-    TemplateName === "LaserRay")
+    JSON.parse(obj.getComponent("Settings").getData()).TemplateName ===
+    "LaserRay")
 
     res.push(obj);
   }
@@ -50,9 +44,7 @@ const createRayTemplate = () => {
     renderer.setData(JSON.stringify(rendererData));
 
     const roadGenerator = ray.addComponent("RoadGenerator");
-    const roadGeneratorData = JSON.parse(
-      roadGenerator.getData()
-    );
+    const roadGeneratorData = JSON.parse(roadGenerator.getData());
     roadGeneratorData.GeneratorAlgorithm = 3;
     roadGeneratorData.Rail.Length = 1;
     roadGeneratorData.Rail.Offsets = [new Float2(0, 0)];
