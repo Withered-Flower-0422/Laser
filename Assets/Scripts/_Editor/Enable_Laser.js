@@ -57,7 +57,7 @@ const createRayTemplate = () => {
 };
 
 export const menuPath =
-editor.language === "Chinese" ? "启用激光" : "Enable Laser";
+editor.language === "Chinese" ? "启用/启用激光" : "Enable/Enable Laser";
 
 export const execute = () => {
   if (!addHurtUITexAsset()) {

@@ -184,11 +184,9 @@ export class Ray {
 
 
 
-
   updateCastItem(castItem) {
     this._castItem = castItem;
   }
-
 
 
 
@@ -216,17 +214,11 @@ export class Ray {
   }
 
 
-
-
-
   disable() {
     this._enabled = false;
 
     if (scene.getItem(this.rayItem.guid)) this.rayItem.setScale(zeroFloat3);
   }
-
-
-
 
 
   destroy() {
@@ -326,7 +318,6 @@ export class Laser {
 
 
 
-
   updateRays(
   startPos,
   vector,
@@ -410,7 +401,6 @@ export class Laser {
 
 
 
-
   applyForce(linearKp, angularKp) {
     if (this._frozen) return;
 
@@ -436,7 +426,6 @@ export class Laser {
       physicsObject.setVelocity(linear, angular);
     }
   }
-
 
 
 
@@ -501,24 +490,15 @@ export class Laser {
   }
 
 
-
-
-
   clearRays() {
     for (const r of this.rays) r.destroy();
     this.rays.length = 0;
   }
 
 
-
-
-
   freeze() {
     this._frozen = true;
   }
-
-
-
 
 
   unfreeze() {

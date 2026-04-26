@@ -20,10 +20,10 @@ Put the whole `Assets` folder in `%USERPROFILE%\AppData\LocalLow\Mushreb\BME Pro
 
 ### Enabling Laser
 
-Click `Scripts → Enable Laser` in the menu bar to enable the Laser system for the current scene.
+Click `Scripts → Enable → Enable Laser` in the menu bar to enable the Laser system for the current scene.
 
 > [!TIP]
-> If there is no `Scripts → Enable Laser` in the menu bar, please restart BME.
+> If there is no `Scripts → Enable → Enable Laser` in the menu bar, please restart BME.
 
 ### Tags
 

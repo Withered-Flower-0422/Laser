@@ -46,7 +46,6 @@ export declare class Ray implements RayData {
     /**
      * Updates the cast item of the ray.
      * @param castItem The new cast item of the ray.
-     * @returns
      */
     updateCastItem(castItem: Item | null): void;
     /**
@@ -55,18 +54,11 @@ export declare class Ray implements RayData {
      * @param endPos The new end position of the ray.
      * @param castItem The new cast item of the ray.
      * @param thickness The new thickness of the ray.
-     * @returns
      */
     enable(startPos: Float3, endPos: Float3, castItem: Item | null, thickness: float): void;
-    /**
-     * Disables the ray and sets its scale to 0 to make it invisible.
-     * @returns
-     */
+    /** Disables the ray and sets its scale to 0 to make it invisible. */
     disable(): void;
-    /**
-     * Destroys the ray and removes it from the scene.
-     * @returns
-     */
+    /** Destroys the ray and removes it from the scene. */
     destroy(): void;
 }
 export declare class Laser {
@@ -119,14 +111,12 @@ export declare class Laser {
      * @param vector The direction of the ray.
      * @param maxDis The maximum distance of the ray.
      * @param thickness The thickness of the ray.
-     * @returns
      */
     updateRays(startPos: Float3, vector: Float3, maxDis: float, thickness: float): void;
     /**
      * Applies force to the **rigid** items **with `"AffectedByLaserForce"` tag** affected by the rays.
      * @param linearKp The linear acceleration per frame.
      * @param angularKp The angular acceleration per frame.
-     * @returns
      */
     applyForce(linearKp: float, angularKp: float): void;
     /**
@@ -137,7 +127,6 @@ export declare class Laser {
      * @param dry The dry factor to the player per frame.
      * @param uiAlphaFactor The UI alpha factor, defaults to `1`.
      * @param uiAnimeSpeed The UI animation speed, defaults to `1`.
-     * @returns
      * @NOTE -
      * If hurt UI is enabled, please call this function in `OnPhysicsUpdate` event to get hurt UI updated.
      */
@@ -154,20 +143,11 @@ export declare class Laser {
      * @returns The number of times the item or player is casted by this laser.
      */
     countCasted(item: Item | Player): number;
-    /**
-     * Clears all the rays.
-     * @returns
-     */
+    /** Clears all the rays. */
     clearRays(): void;
-    /**
-     * Freezes the laser, which means the rays cannot be updated.
-     * @returns
-     */
+    /** Freezes the laser, which means the rays cannot be updated. */
     freeze(): void;
-    /**
-     * Unfreezes the laser, which means the rays can be updated.
-     * @returns
-     */
+    /** Unfreezes the laser, which means the rays can be updated. */
     unfreeze(): void;
 }
 export default Laser;
