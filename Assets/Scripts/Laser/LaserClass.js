@@ -95,17 +95,17 @@ export const createHurtUI = () => {
 
 
 export class Ray {
-
+  _startPos;
   get startPos() {
     return this._startPos;
   }
 
-
+  _endPos;
   get endPos() {
     return this._endPos;
   }
 
-
+  _castItem;
   get castItem() {
     return this._castItem;
   }
@@ -120,7 +120,7 @@ export class Ray {
     return this._destroyed;
   }
 
-
+  rayItem;
 
 
 
@@ -230,7 +230,7 @@ export class Ray {
 export class Laser {
 
 
-
+  static instances;
 
   static {
     const instances = variables.get(LASER_INSTANCES);
@@ -289,7 +289,7 @@ export class Laser {
   }
 
   rays = [];
-
+  hurtUI;
 
 
 
