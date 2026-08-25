@@ -70,21 +70,26 @@ getComponent("Settings").
 getData("Tags").
 includes("AffectedByLaserForce");
 
-export const createHurtUI = () => {
-  const hurtUI = uiCanvas.createUI("Panel");
-  hurtUI.alpha = 0;
-  hurtUI.sizeDelta = new Float2(0, 0);
-  hurtUI.anchorMin = new Float2(0, 0);
-  hurtUI.anchorMax = new Float2(1, 1);
+export const createScreenUI = (type) => {
+  const screenUI = uiCanvas.createUI("Panel");
+  screenUI.alpha = 0;
+  screenUI.sizeDelta = new Float2(0, 0);
+  screenUI.anchorMin = new Float2(0, 0);
+  screenUI.anchorMax = new Float2(1, 1);
 
-  const hurtUIImage = uiCanvas.createUI("Image");
-  hurtUIImage.parent = hurtUI;
-  hurtUIImage.texture = "Textures/Screen/Screen_Red.tex";
-  hurtUIImage.sizeDelta = new Float2(0, 0);
-  hurtUIImage.anchorMin = new Float2(0, 0);
-  hurtUIImage.anchorMax = new Float2(1, 1);
+  const screenUIImage = uiCanvas.createUI("Image");
+  screenUIImage.parent = screenUI;
+  screenUIImage.texture = `Textures/Screen/Screen_${
+  {
+    Hurt: "Red",
+    Heal: "Green"
+  }[type]}.tex`;
 
-  return hurtUI;
+  screenUIImage.sizeDelta = new Float2(0, 0);
+  screenUIImage.anchorMin = new Float2(0, 0);
+  screenUIImage.anchorMax = new Float2(1, 1);
+
+  return screenUI;
 };
 
 
@@ -290,6 +295,7 @@ export class Laser {
 
   rays = [];
   hurtUI;
+  healUI;
 
 
 
@@ -304,7 +310,10 @@ export class Laser {
 
 
   {let tags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];let enableUI = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;let pushToInstances = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;this.material = material;this.tags = tags;
-    if (enableUI) this.hurtUI = createHurtUI();
+    if (enableUI) {
+      this.hurtUI = createScreenUI("Hurt");
+      this.healUI = createScreenUI("Heal");
+    }
     if (pushToInstances) Laser.instances.push(this);
   }
 
@@ -455,17 +464,28 @@ export class Laser {
       player.wetness -= dry * castCnt;
     }
 
-    if (!this.hurtUI) return;
-
+    const maxAlpha =
+    0.1 * Math.min(Math.abs(damage) * 4 * castCnt * uiAlphaFactor, 1);
     const speed = 0.005 * uiAnimeSpeed;
-    if (castCnt > 0 && damage > 0) {
-      const maxAlpha =
-      0.1 * Math.min(damage * 4 * castCnt * uiAlphaFactor, 1);
-      const diff = maxAlpha - this.hurtUI.alpha;
-      if (diff > 0) this.hurtUI.alpha += Math.min(diff, speed);else
-      this.hurtUI.alpha -= Math.min(-diff, speed);
-    } else {
-      if (this.hurtUI.alpha > 0) this.hurtUI.alpha -= speed;
+
+    if (this.hurtUI) {
+      if (castCnt > 0 && damage > 0) {
+        const diff = maxAlpha - this.hurtUI.alpha;
+        if (diff > 0) this.hurtUI.alpha += Math.min(diff, speed);else
+        this.hurtUI.alpha -= Math.min(-diff, speed);
+      } else {
+        if (this.hurtUI.alpha > 0) this.hurtUI.alpha -= speed;
+      }
+    }
+
+    if (this.healUI) {
+      if (castCnt > 0 && damage < 0) {
+        const diff = maxAlpha - this.healUI.alpha;
+        if (diff > 0) this.healUI.alpha += Math.min(diff, speed);else
+        this.healUI.alpha -= Math.min(-diff, speed);
+      } else {
+        if (this.healUI.alpha > 0) this.healUI.alpha -= speed;
+      }
     }
   }
 

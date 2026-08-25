@@ -2,8 +2,8 @@
 import { editor, file, scene, dialogWindowManager, Float2 } from "editorApi";
 
 
-const addHurtUITexAsset = () => {
-  const path = "Textures/Screen/Screen_Red.tex";
+const addScreenUITexAsset = (type) => {
+  const path = `Textures/Screen/Screen_${type}.tex`;
   if (!file.exist(`${file.dataDirectoryPath}/Assets/${path}`)) return false;
 
   const assetReference = scene.
@@ -60,12 +60,24 @@ export const menuPath =
 editor.language === "Chinese" ? "启用/启用激光" : "Enable/Enable Laser";
 
 export const execute = () => {
-  if (!addHurtUITexAsset()) {
+  if (!addScreenUITexAsset("Red")) {
     dialogWindowManager.openMessageDialog(
       menuPath,
       editor.language === "Chinese" ?
       '"Screen_Red.tex" 材质文件不存在，请将其添加到 "Assets/Textures/Screen/" 文件夹中。' :
       '"Screen_Red.tex" not found. Please add it to "Assets/Textures/Screen/" folder.',
+      editor.language === "Chinese" ? "确认" : "Ok",
+      () => {}
+    );
+    return;
+  }
+
+  if (!addScreenUITexAsset("Green")) {
+    dialogWindowManager.openMessageDialog(
+      menuPath,
+      editor.language === "Chinese" ?
+      '"Screen_Green.tex" 材质文件不存在，请将其添加到 "Assets/Textures/Screen/" 文件夹中。' :
+      '"Screen_Green.tex" not found. Please add it to "Assets/Textures/Screen/" folder.',
       editor.language === "Chinese" ? "确认" : "Ok",
       () => {}
     );

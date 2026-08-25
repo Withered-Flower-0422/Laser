@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { player, scene, math, levelManager } from "gameApi";
-import Laser, { createHurtUI } from "Scripts/Laser/LaserClass.js";
+import Laser, { createScreenUI } from "Scripts/Laser/LaserClass.js";
 import mathEx from "Scripts/Utility/mathEx.js";
 
 
@@ -51,7 +51,7 @@ export const init = (self, v) => {
 
   );
 
-  hurtUI = createHurtUI();
+  hurtUI = createScreenUI("Hurt");
   renderer = self.getComponent("Renderer");
   audioPlayer = self.getComponent("AudioPlayer");
   physicsObject = self.getComponent("PhysicsObject");
