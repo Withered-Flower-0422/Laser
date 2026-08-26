@@ -60,48 +60,37 @@ export const menuPath =
 editor.language === "Chinese" ? "启用/启用激光" : "Enable/Enable Laser";
 
 export const execute = () => {
-  if (!addScreenUITexAsset("Red")) {
-    dialogWindowManager.openMessageDialog(
-      menuPath,
-      editor.language === "Chinese" ?
-      '"Screen_Red.tex" 材质文件不存在，请将其添加到 "Assets/Textures/Screen/" 文件夹中。' :
-      '"Screen_Red.tex" not found. Please add it to "Assets/Textures/Screen/" folder.',
-      editor.language === "Chinese" ? "确认" : "Ok",
-      () => {}
-    );
-    return;
-  }
-
-  if (!addScreenUITexAsset("Green")) {
-    dialogWindowManager.openMessageDialog(
-      menuPath,
-      editor.language === "Chinese" ?
-      '"Screen_Green.tex" 材质文件不存在，请将其添加到 "Assets/Textures/Screen/" 文件夹中。' :
-      '"Screen_Green.tex" not found. Please add it to "Assets/Textures/Screen/" folder.',
-      editor.language === "Chinese" ? "确认" : "Ok",
-      () => {}
-    );
-    return;
+  for (const type of ["Red", "Green"]) {
+    if (!addScreenUITexAsset(type)) {
+      dialogWindowManager.openMessageDialog(
+        menuPath,
+        editor.language === "Chinese" ?
+        `"Screen_${type}.tex" 材质文件不存在，请将其添加到 "Assets/Textures/Screen/" 文件夹中。` :
+        `"Screen_${type}.tex" not found. Please add it to "Assets/Textures/Screen/" folder.`,
+        editor.language === "Chinese" ? "确认" : "Ok",
+        () => {}
+      );
+      return;
+    }
   }
 
   const rays = createRayTemplate();
-  if (rays.length > 1) {
-    dialogWindowManager.openMessageDialog(
-      menuPath,
-      editor.language === "Chinese" ?
-      "检测到场景中存在多个激光模板，请删除多余的模板。" :
-      "Detected more than one LaserRay template in the scene. Please remove the extra ones.",
-      editor.language === "Chinese" ? "确认" : "Ok",
-      () => {}
-    );
-  } else {
-    dialogWindowManager.openMessageDialog(
-      menuPath,
-      editor.language === "Chinese" ?
-      "激光已启用。" :
-      "Laser has been enabled.",
-      editor.language === "Chinese" ? "确认" : "Ok",
-      () => {}
-    );
-  }
+  if (rays.length > 1)
+  dialogWindowManager.openMessageDialog(
+    menuPath,
+    editor.language === "Chinese" ?
+    "检测到场景中存在多个激光模板，请删除多余的模板。" :
+    "Detected more than one LaserRay template in the scene. Please remove the extra ones.",
+    editor.language === "Chinese" ? "确认" : "Ok",
+    () => {}
+  );else
+
+  dialogWindowManager.openMessageDialog(
+    menuPath,
+    editor.language === "Chinese" ?
+    "激光已启用。" :
+    "Laser has been enabled.",
+    editor.language === "Chinese" ? "确认" : "Ok",
+    () => {}
+  );
 };

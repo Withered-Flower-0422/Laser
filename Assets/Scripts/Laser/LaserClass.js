@@ -436,6 +436,23 @@ export class Laser {
     }
   }
 
+  updateScreenUI(
+  ui,
+  showCond,
+  maxAlpha,
+  speed)
+  {
+    if (!ui) return;
+
+    if (showCond) {
+      const diff = maxAlpha - ui.alpha;
+      if (diff > 0) ui.alpha += Math.min(diff, speed);else
+      ui.alpha -= Math.min(-diff, speed);
+    } else {
+      if (ui.alpha > 0) ui.alpha -= speed;
+    }
+  }
+
 
 
 
@@ -468,25 +485,18 @@ export class Laser {
     0.1 * Math.min(Math.abs(damage) * 4 * castCnt * uiAlphaFactor, 1);
     const speed = 0.005 * uiAnimeSpeed;
 
-    if (this.hurtUI) {
-      if (castCnt > 0 && damage > 0) {
-        const diff = maxAlpha - this.hurtUI.alpha;
-        if (diff > 0) this.hurtUI.alpha += Math.min(diff, speed);else
-        this.hurtUI.alpha -= Math.min(-diff, speed);
-      } else {
-        if (this.hurtUI.alpha > 0) this.hurtUI.alpha -= speed;
-      }
-    }
-
-    if (this.healUI) {
-      if (castCnt > 0 && damage < 0) {
-        const diff = maxAlpha - this.healUI.alpha;
-        if (diff > 0) this.healUI.alpha += Math.min(diff, speed);else
-        this.healUI.alpha -= Math.min(-diff, speed);
-      } else {
-        if (this.healUI.alpha > 0) this.healUI.alpha -= speed;
-      }
-    }
+    this.updateScreenUI(
+      this.hurtUI,
+      castCnt > 0 && damage > 0,
+      maxAlpha,
+      speed
+    );
+    this.updateScreenUI(
+      this.healUI,
+      castCnt > 0 && damage < 0,
+      maxAlpha,
+      speed
+    );
   }
 
 
