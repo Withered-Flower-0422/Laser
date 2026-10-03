@@ -56,6 +56,28 @@ const createRayTemplate = () => {
   return res;
 };
 
+const createLaserManager = () => {
+  const res = [];
+  for (const obj of scene.getAllObjects()) {
+    if (obj.type !== "Item") continue;
+    const exec = obj.getComponent("Executor");
+    if (!exec) continue;
+    if (JSON.parse(exec.getData()).ScriptPath === "Scripts/Laser/Laser.js")
+    res.push(obj);
+  }
+  if (res.length === 0) {
+    const laser = scene.createObject("LaserManager", "Item");
+
+    const executor = laser.addComponent("Executor");
+    const executorData = JSON.parse(executor.getData());
+    executorData.ScriptPath = "Scripts/Laser/Laser.js";
+    executor.setData(JSON.stringify(executorData));
+
+    res.push(laser);
+  }
+  return res;
+};
+
 export const menuPath =
 editor.language === "Chinese" ? "启用/启用激光" : "Enable/Enable Laser";
 
@@ -74,16 +96,32 @@ export const execute = () => {
     }
   }
 
-  const rays = createRayTemplate();
-  if (rays.length > 1)
-  dialogWindowManager.openMessageDialog(
-    menuPath,
-    editor.language === "Chinese" ?
-    "检测到场景中存在多个激光模板，请删除多余的模板。" :
-    "Detected more than one LaserRay template in the scene. Please remove the extra ones.",
-    editor.language === "Chinese" ? "确认" : "Ok",
-    () => {}
-  );else
+  const rayTemplate = createRayTemplate();
+  const laserManager = createLaserManager();
+
+  if (rayTemplate.length > 1) {
+    dialogWindowManager.openMessageDialog(
+      menuPath,
+      editor.language === "Chinese" ?
+      "检测到场景中存在多个激光模板，请删除多余的模板。" :
+      "Detected more than one LaserRay template in the scene. Please remove the extra ones.",
+      editor.language === "Chinese" ? "确认" : "Ok",
+      () => {}
+    );
+    return;
+  }
+
+  if (laserManager.length > 1) {
+    dialogWindowManager.openMessageDialog(
+      menuPath,
+      editor.language === "Chinese" ?
+      "检测到场景中存在多个激光管理器，请删除多余的管理器。" :
+      "Detected more than one Laser Manager in the scene. Please remove the extra ones.",
+      editor.language === "Chinese" ? "确认" : "Ok",
+      () => {}
+    );
+    return;
+  }
 
   dialogWindowManager.openMessageDialog(
     menuPath,

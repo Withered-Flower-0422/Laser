@@ -1,13 +1,13 @@
 // @ts-nocheck
+
+
+
+
+
+
+
 import { scene } from "gameApi";
-import Laser from "Scripts/Laser/LaserClass.js";
-
-
-
-
-
-
-
+import laserManager from "Scripts/Laser/LaserManager.js";
 
 
 
@@ -66,7 +66,7 @@ self, _ref) =>
   }
 
   if (OnPhysicsUpdate && active) {
-    if (doorItems.some((d) => Laser.isCasted(d))) {
+    if (doorItems.some((d) => laserManager.isCastedByLaser(d))) {
       active = false;
       setMat(nullMat);
       unlockSound.play();

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import Laser from "Scripts/Laser/LaserClass.js";
+import laserManager from "Scripts/Laser/LaserManager.js";
 
 
 
@@ -42,9 +42,9 @@ self, _ref) =>
 
   if (active && OnPhysicsUpdate) {
     if (
-    Laser.getCastedLasers(self).some((l) =>
-    l.tags.includes("CanDestroyItem")
-    ))
+    laserManager.
+    getCastedLasers(self, true).
+    some((l) => l.config.tags.includes("CanDestroyItem")))
     {
       active = false;
 

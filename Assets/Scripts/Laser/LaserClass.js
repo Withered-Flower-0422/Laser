@@ -1,302 +1,23 @@
 // @ts-nocheck
+
+import { Float3, math } from "gameApi";
+
+import Ray from "Scripts/Laser/RayClass.js";
 import {
-  player,
-  scene,
-  uiCanvas,
-  variables,
-  math,
-  Float2,
-  Float3 } from
-"gameApi";
+  calEndPos,
+  isAffectedByLaserForce,
+  isReflectLaser,
+  laserCast } from
+"Scripts/Laser/Utils.js";
 import mathEx from "Scripts/Utility/mathEx.js";
 
-
-const LASER_INSTANCES = "LaserInstances";
-
-const unitZFloat3 = new Float3(0, 0, 1);
-const zeroFloat3 = new Float3(0, 0, 0);
-
-const calEndPos = (startPos, vector, distance) =>
-mathEx.addFloat3(
-  startPos,
-  mathEx.scaleFloat3(math.normalizeFloat3(vector), distance)
-);
-
-const calRayTransform = (startPos, endPos, thickness) =>
-[
-startPos,
-math.quaternionToFloat3(
-  mathEx.getQuatFromAxes(
-    unitZFloat3,
-    mathEx.subFloat3(endPos, startPos)
-  )
-),
-new Float3(thickness, thickness, math.distanceFloat3(startPos, endPos))];
-
-
-const isSamePos = function (a, b) {let threshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e-3;return (
-    math.distanceFloat3(a, b) < threshold);};
-
-const laserCast = (startPos, endPos) =>
-scene.
-raycastAll(startPos, endPos).
-sort((_ref, _ref2) => {let { fraction: f1 } = _ref;let { fraction: f2 } = _ref2;return f1 - f2;}).
-find((r) => !isSamePos(r.position, startPos) && !isIgnoreLaser(r.item));
-
-const ignoreLaserCache = {};
-const isIgnoreLaser = (item) =>
-item.guid === player.guid ?
-player.ballType === "IceBall" :
-ignoreLaserCache[item.guid] ??= item.
-getComponent("Settings").
-getData("Tags").
-includes("IgnoreLaser");
-
-const reflectLaserCache = {};
-const isReflectLaser = (item) =>
-item.guid === player.guid ?
-player.ballType === "SteelBall" :
-reflectLaserCache[item.guid] ??= item.
-getComponent("Settings").
-getData("Tags").
-includes("ReflectLaser");
-
-const affectedByLaserForceCache = {};
-const isAffectedByLaserForce = (item) =>
-item.guid === player.guid ?
-true :
-affectedByLaserForceCache[item.guid] ??= item.
-getComponent("Settings").
-getData("Tags").
-includes("AffectedByLaserForce");
-
-export const createScreenUI = (type) => {
-  const screenUI = uiCanvas.createUI("Panel");
-  screenUI.alpha = 0;
-  screenUI.sizeDelta = new Float2(0, 0);
-  screenUI.anchorMin = new Float2(0, 0);
-  screenUI.anchorMax = new Float2(1, 1);
-
-  const screenUIImage = uiCanvas.createUI("Image");
-  screenUIImage.parent = screenUI;
-  screenUIImage.texture = `Textures/Screen/Screen_${
-  {
-    Hurt: "Red",
-    Heal: "Green"
-  }[type]}.tex`;
-
-  screenUIImage.sizeDelta = new Float2(0, 0);
-  screenUIImage.anchorMin = new Float2(0, 0);
-  screenUIImage.anchorMax = new Float2(1, 1);
-
-  return screenUI;
-};
-
-
-
-
-
-
-
-
-export class Ray {
-  _startPos;
-  get startPos() {
-    return this._startPos;
-  }
-
-  _endPos;
-  get endPos() {
-    return this._endPos;
-  }
-
-  _castItem;
-  get castItem() {
-    return this._castItem;
-  }
-
-  _enabled = true;
-  get enabled() {
-    return this._enabled;
-  }
-
-  _destroyed = false;
-  get destroyed() {
-    return this._destroyed;
-  }
-
-  rayItem;
-
-
-
-
-
-
-
-
-
-  constructor(
-  startPos,
-  endPos,
-  castItem,
-  thickness,
-  material)
-  {
-    this._startPos = startPos;
-    this._endPos = endPos;
-    this._castItem = castItem;
-
-    this.rayItem = scene.createItem(
-      "LaserRay",
-      ...calRayTransform(startPos, endPos, thickness)
-    );
-    this.rayItem.
-    getComponent("Renderer").
-    setData({ Materials: [material] });
-  }
-
-
-
-
-
-
-  isCasted(item) {
-    return (
-      this._enabled &&
-      !this._destroyed &&
-      this._castItem?.guid === item.guid);
-
-  }
-
-
-
-
-
-
-
-
-
-  hasSameStartAndEndPos(startPos, endPos) {let threshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e-3;
-    if (!this._enabled || this._destroyed) return false;
-
-    return (
-      isSamePos(this.startPos, startPos, threshold) &&
-      isSamePos(this.endPos, endPos, threshold));
-
-  }
-
-
-
-
-
-  updateCastItem(castItem) {
-    this._castItem = castItem;
-  }
-
-
-
-
-
-
-
-
-  enable(
-  startPos,
-  endPos,
-  castItem,
-  thickness)
-  {
-    this._enabled = true;
-
-    this._startPos = startPos;
-    this._endPos = endPos;
-    this._castItem = castItem;
-
-    if (scene.getItem(this.rayItem.guid))
-    this.rayItem.setTransform(
-      ...calRayTransform(startPos, endPos, thickness)
-    );
-  }
-
-
-  disable() {
-    this._enabled = false;
-
-    if (scene.getItem(this.rayItem.guid)) this.rayItem.setScale(zeroFloat3);
-  }
-
-
-  destroy() {
-    this._destroyed = true;
-    scene.destroyItem(this.rayItem.guid);
-  }
-}
-
 export class Laser {
-
-
-  static instances;
-
-  static {
-    const instances = variables.get(LASER_INSTANCES);
-    if (instances) this.instances = instances;else
-    variables.set(LASER_INSTANCES, this.instances = []);
-  }
-
-
-
-
-
-
-
-  static isCasted(item) {for (var _len = arguments.length, excludeLasers = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {excludeLasers[_key - 1] = arguments[_key];}
-    return this.instances.some(
-      (l) => !excludeLasers.includes(l) && l.isCasted(item)
-    );
-  }
-
-
-
-
-
-
-
-  static countCasted(item) {for (var _len2 = arguments.length, excludeLasers = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {excludeLasers[_key2 - 1] = arguments[_key2];}
-    return this.instances.reduce(
-      (acc, l) =>
-      acc + (excludeLasers.includes(l) ? 0 : l.countCasted(item)),
-      0
-    );
-  }
-
-
-
-
-
-
-  static getCastedLasers(item) {
-    return this.instances.filter((l) => l.isCasted(item));
-  }
-
-
-
-
-
-  static instanceNum() {
-    return this.instances.length;
-  }
-
-
-
   _frozen = false;
   get frozen() {
     return this._frozen;
   }
 
   rays = [];
-  hurtUI;
-  healUI;
-
 
 
 
@@ -305,34 +26,21 @@ export class Laser {
 
 
   constructor(
-  material)
-
-
-
-  {let tags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];let enableUI = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;let pushToInstances = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;this.material = material;this.tags = tags;
-    if (enableUI) {
-      this.hurtUI = createScreenUI("Hurt");
-      this.healUI = createScreenUI("Heal");
-    }
-    if (pushToInstances) Laser.instances.push(this);
-  }
-
-
-
-
-
-
-
-
-
-
-
-  updateRays(
-  startPos,
-  vector,
-  maxDis,
+  force,
+  material,
   thickness)
-  {
+  {this.force = force;this.material = material;this.thickness = thickness;}
+
+
+
+
+
+
+
+
+
+
+  updateRays(startPos, vector, maxDis) {
     if (this._frozen) return;
 
     const raysData = [];
@@ -393,24 +101,20 @@ export class Laser {
       const ray = this.rays[j];
       const { startPos, endPos, castItem } = raysData[j];
 
-      if (ray) ray.enable(startPos, endPos, castItem, thickness);else
+      if (ray) ray.enable(startPos, endPos, castItem, this.thickness);else
 
       this.rays[j] = new Ray(
         startPos,
         endPos,
         castItem,
-        thickness,
+        this.thickness,
         this.material
       );
     }
   }
 
 
-
-
-
-
-  applyForce(linearKp, angularKp) {
+  applyForce() {
     if (this._frozen) return;
 
     for (let i = 0; i < this.rays.length; i++) {
@@ -429,74 +133,11 @@ export class Laser {
         physicsObject.getLinearVelocity(),
         physicsObject.getAngularVelocity(),
         physicsObject.getMass(),
-        linearKp,
-        angularKp
+        this.force[0],
+        this.force[1]
       );
       physicsObject.setVelocity(linear, angular);
     }
-  }
-
-  updateScreenUI(
-  ui,
-  showCond,
-  maxAlpha,
-  speed)
-  {
-    if (!ui) return;
-
-    if (showCond) {
-      const diff = maxAlpha - ui.alpha;
-      if (diff > 0) ui.alpha += Math.min(diff, speed);else
-      ui.alpha -= Math.min(-diff, speed);
-    } else {
-      if (ui.alpha > 0) ui.alpha -= speed;
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-  updatePlayerStates(
-  damage,
-  heat,
-  charge,
-  dry)
-
-
-  {let uiAlphaFactor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;let uiAnimeSpeed = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 1;
-    const castCnt = this.countCasted(player);
-
-    if (castCnt > 0) {
-      player.durability -= damage * castCnt;
-      player.temperature += heat * castCnt;
-      player.power += charge * castCnt;
-      player.wetness -= dry * castCnt;
-    }
-
-    const maxAlpha =
-    0.1 * Math.min(Math.abs(damage) * 4 * castCnt * uiAlphaFactor, 1);
-    const speed = 0.005 * uiAnimeSpeed;
-
-    this.updateScreenUI(
-      this.hurtUI,
-      castCnt > 0 && damage > 0,
-      maxAlpha,
-      speed
-    );
-    this.updateScreenUI(
-      this.healUI,
-      castCnt > 0 && damage < 0,
-      maxAlpha,
-      speed
-    );
   }
 
 

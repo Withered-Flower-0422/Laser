@@ -1,16 +1,17 @@
 // @ts-nocheck
-import { player, scene, math, levelManager } from "gameApi";
-import Laser, { createScreenUI } from "Scripts/Laser/LaserClass.js";
+
+
+
+
+
+
+
+
+
+import { levelManager, math, player, scene } from "gameApi";
+import laserManager from "Scripts/Laser/LaserManager.js";
+import { createScreenUI } from "Scripts/Laser/Utils.js";
 import mathEx from "Scripts/Utility/mathEx.js";
-
-
-
-
-
-
-
-
-
 
 
 
@@ -132,7 +133,7 @@ self, _ref2) =>
   }
 
   if (OnPhysicsUpdate) {
-    if (active && Laser.isCasted(self)) explode(self);
+    if (active && laserManager.isCastedByLaser(self)) explode(self);
     if (hurtUI.alpha > 0) hurtUI.alpha -= 0.003;
   }
 };

@@ -1,12 +1,12 @@
 // @ts-nocheck
+
+
+
+
+
+
 import { scene } from "gameApi";
-import Laser from "Scripts/Laser/LaserClass.js";
-
-
-
-
-
-
+import laserManager from "Scripts/Laser/LaserManager.js";
 
 
 
@@ -61,7 +61,7 @@ self, _ref) =>
   }
 
   if (OnPhysicsUpdate) {
-    if (Laser.isCasted(self)) unlockTimer = unlockLastTime;
+    if (laserManager.isCastedByLaser(self)) unlockTimer = unlockLastTime;
 
     if (unlockTimer > 0) {
       unlockTimer--;

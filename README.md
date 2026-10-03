@@ -204,6 +204,7 @@ A pure laser that emits laser rays.
 | `stopUpdateDistance` |     float      |          50           | If the distance between the laser and the player is larger than this value, the laser will stop being updated. If the value is negative, the laser will always be updated. _This is for sake of optimizing performance._ |
 | `halfSample`         |      bool      |         true          | If true, the laser will be updated every other frame. _This is for sake of optimizing performance._                                                                                                                      |
 | `asRepeater`         |      bool      |         false         | If true, the laser won't emit rays unless itself is hit by any laser ray.                                                                                                                                                |
+| `isStatic`           |      bool      |         false         | If the item which the laser is attached to is static, please set this option to true. _This can slightly improve performance._                                                                                           |
 | `bake`               |      bool      |         false         | If true, the laser will be baked and never be updated or affect other items during gameplay. _This is for decoration._                                                                                                   |
 
 #### Damage Table
