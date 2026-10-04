@@ -42,7 +42,7 @@
 - `CanDestroyItem`: 拥有此标签的激光可以摧毁拥有 `DestroyedByLaser` 脚本的元件。
 
 > [!WARNING]
-> 激光系统已经占用了 `variables` 模块中的 `LaserInstances` 变量名。
+> 激光系统已经占用了 `variables` 模块中的 `LaserManager` 变量名。
 > **请勿** 在自己的脚本中使用此变量名，也 **不要** 调用 `variables.clear()`。
 
 ## 元件

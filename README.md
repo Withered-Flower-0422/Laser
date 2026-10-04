@@ -42,7 +42,7 @@ These tags should be added to `Laser_Head` sub-items.
 - `CanDestroyItem`: A laser with this tag can destroy items with `DestroyedByLaser` script.
 
 > [!WARNING]
-> The laser system has occupied the `LaserInstances` variable name in the `variables` module.
+> The laser system has occupied the `LaserManager` variable name in the `variables` module.
 > **TRY NOT** to use this variable name in your own scripts, nor to call `variables.clear()`.
 
 ## Items
