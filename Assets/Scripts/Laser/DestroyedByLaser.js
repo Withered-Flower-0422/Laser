@@ -16,7 +16,7 @@ let physicsObject;
 
 let originalMat;
 
-export const init = (self, v) => {
+export const init = (self) => {
   renderer = self.getComponent("Renderer");
   audioPlayer = self.getComponent("AudioPlayer");
   physicsObject = self.getComponent("PhysicsObject");
