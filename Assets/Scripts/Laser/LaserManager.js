@@ -112,34 +112,37 @@ class LaserManager extends LaserManagerBase {
 
     if (OnPhysicsUpdate) {
       for (const l of this.lasers) {
-        const pos = l.trans?.[0] ?? l.config.bindItem.getTransform()[0];
+        const { laser, config, static: st } = l;
+
+        const pos = st?.trans[0] ?? config.bindItem.getTransform()[0];
 
         if (
         levelManager.timerEnabled &&
         math.distanceFloat3(player.position, pos) >
-        l.config.stopUpdateDistance)
+        config.stopUpdateDistance)
+        {
+          laser.freeze();
+          continue;
+        } else laser.unfreeze();
 
-        l.laser.freeze();else
-        l.laser.unfreeze();
+        l.updateCount = (l.updateCount + 1) % l.config.updateFrequency;
+        if (l.updateCount !== 0) continue;
 
-        if (l.config.halfSample && (l.sample = !l.sample)) continue;
-
-        l.laser.updateRays(
+        laser.updateRays(
           pos,
-          l.vector ??
+          st?.vector ??
           mathEx.transFloat3WithQuat(
-            l.config.vector,
-            l.trans?.[1] ??
-            l.config.bindItem.getRotationQuaternion()
+            config.vector,
+            config.bindItem.getRotationQuaternion()
           ),
-          l.config.asRepeater ?
-          this.isCastedByLaser(l.config.bindItem) ?
-          l.config.maxDistance :
+          config.asRepeater ?
+          this.isCastedByLaser(config.bindItem) ?
+          config.maxDistance :
           0 :
-          l.config.maxDistance
+          config.maxDistance
         );
 
-        l.laser.applyForce();
+        laser.applyForce();
       }
 
       if (!player.ballType) return;

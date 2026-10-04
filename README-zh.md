@@ -200,7 +200,7 @@
 | `material`           | AssetReference |  SwitcherGlow_Purple  | 激光光束的材质。                                                                                     |
 | `thickness`          |     float      |           1           | 激光光束的厚度因子。                                                                                 |
 | `stopUpdateDistance` |     float      |          50           | 如果激光和玩家之间的距离大于这个值，激光将停止更新。如果值为负，激光将始终更新。_用于优化性能_       |
-| `halfSample`         |      bool      |         true          | 如果为真，激光将每隔一帧更新一次。_用于优化性能_                                                     |
+| `updateFrequency`    |      int       |           2           | 激光每隔多少帧更新一次。_用于优化性能_                                                               |
 | `asRepeater`         |      bool      |         false         | 如果为真，除非激光本身被激光光束击中，否则激光将不会发射光束。                                       |
 | `isStatic`           |      bool      |         false         | 如果激光依附的元件是静止的，请设置此选项为真。_能一定程度提高性能_                                   |
 | `bake`               |      bool      |         false         | 如果为真，激光将会被提前烘焙，在游玩过程中不再实时更新或影响其他元件。_用于装饰_                     |

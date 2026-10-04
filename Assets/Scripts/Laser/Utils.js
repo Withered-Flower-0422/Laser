@@ -53,10 +53,13 @@ export class LaserWrapper {
 
 
 
-  trans = null;
-  vector = null;
+  static =
+
+
+  null;
+
   laser;
-  sample = Math.random() < 0.5;
+  updateCount;
 
   constructor(
   bindItem,
@@ -69,7 +72,7 @@ export class LaserWrapper {
   material,
   thickness,
   stopUpdateDistance,
-  halfSample,
+  updateFrequency,
   asRepeater,
   isStatic)
   {
@@ -82,20 +85,20 @@ export class LaserWrapper {
       chargeFactor,
       dryFactor,
       stopUpdateDistance,
-      halfSample,
+      updateFrequency,
       asRepeater,
       tags: bindItem.getComponent("Settings").getData("Tags")
     };
     this.laser = new Laser(force, material, thickness);
+    this.updateCount = rndInt(0, updateFrequency);
     if (isStatic) {
-      this.trans = [
-      bindItem.getTransform()[0],
-      bindItem.getRotationQuaternion()];
+      const pos = bindItem.getTransform()[0];
+      const rot = bindItem.getRotationQuaternion();
 
-      this.vector = mathEx.transFloat3WithQuat(
-        this.config.vector,
-        this.trans[1]
-      );
+      this.static = {
+        trans: [pos, rot],
+        vector: mathEx.transFloat3WithQuat(this.config.vector, rot)
+      };
     }
   }
 }
@@ -200,3 +203,5 @@ find((r) => !isSamePos(r.position, startPos) && !isIgnoreLaser(r.item));
 
 export const unitZFloat3 = new Float3(0, 0, 1);
 export const zeroFloat3 = new Float3(0, 0, 0);
+export const rndInt = (min, max) =>
+Math.floor(Math.random() * (max - min)) + min;
