@@ -16,7 +16,7 @@ import { mathEx } from "Scripts/Utility/mathEx.js";
 
 
 
-export class LaserManagerBase extends Manager {
+export class BaseLaserManager extends Manager {
   enable() {
     throw new Error("LaserManager cannot be disabled or enabled.");
   }

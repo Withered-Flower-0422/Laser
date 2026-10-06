@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { math } from "gameApi";
+import { Float2, math } from "gameApi";
 import Laser from "Scripts/Laser/LaserClass.js";
 import laserManager from "Scripts/Laser/LaserManager.js";
 import { LaserWrapper } from "Scripts/Laser/Utils.js";
@@ -43,8 +43,8 @@ const normalize = () => {
   if (stopUpdateDistance < 0) stopUpdateDistance = Infinity;
   if (updateFrequency < 1) updateFrequency = 1;
 
-  force[0] *= updateFrequency;
-  force[1] *= updateFrequency;
+  force.x *= updateFrequency;
+  force.y *= updateFrequency;
 };
 
 export const init = (self, v) => {
@@ -60,7 +60,7 @@ export const init = (self, v) => {
         self.getRotationQuaternion()
       ),
       maxDistance: math.lengthFloat3(offset),
-      laser: new Laser([0, 0], material, thickness)
+      laser: new Laser(new Float2(0, 0), material, thickness)
     });
   } else
   for (const offset of endPosOffsets)

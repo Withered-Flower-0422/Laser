@@ -4,14 +4,14 @@ import { levelManager, math, player } from "gameApi";
 
 import {
   createScreenUI,
-  LaserManagerBase } from
+  BaseLaserManager } from
 
 "Scripts/Laser/Utils.js";
 import "Scripts/UtilClass/Manager.js";
 import { mathEx } from "Scripts/Utility/mathEx.js";
 import utils from "Scripts/Utility/utils.js";
 
-class LaserManager extends LaserManagerBase {
+class LaserManager extends BaseLaserManager {
   lasers = [];
   hurtUI = createScreenUI("Hurt");
   healUI = createScreenUI("Heal");

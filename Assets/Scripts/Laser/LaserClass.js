@@ -133,8 +133,8 @@ export class Laser {
         physicsObject.getLinearVelocity(),
         physicsObject.getAngularVelocity(),
         physicsObject.getMass(),
-        this.force[0],
-        this.force[1]
+        this.force.x,
+        this.force.y
       );
       physicsObject.setVelocity(linear, angular);
     }
