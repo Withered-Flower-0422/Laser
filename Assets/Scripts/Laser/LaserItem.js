@@ -60,7 +60,7 @@ export const init = (self, v) => {
         self.getRotationQuaternion()
       ),
       maxDistance: math.lengthFloat3(offset),
-      laser: new Laser(new Float2(0, 0), material, thickness)
+      laser: new Laser(null, material, thickness)
     });
   } else
   for (const offset of endPosOffsets)

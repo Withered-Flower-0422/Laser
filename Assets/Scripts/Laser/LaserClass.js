@@ -115,7 +115,7 @@ export class Laser {
 
 
   applyForce() {
-    if (this._frozen) return;
+    if (this._frozen || !this.force) return;
 
     for (let i = 0; i < this.rays.length; i++) {
       const { enabled, startPos, endPos, castItem } = this.rays[i];
