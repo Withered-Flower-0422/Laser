@@ -1,10 +1,8 @@
 // @ts-nocheck
 
-import { Float2, math } from "gameApi";
-import Laser from "Scripts/Laser/LaserClass.js";
+import { Float2 } from "gameApi";
 import laserManager from "Scripts/Laser/LaserManager.js";
-import { LaserWrapper } from "Scripts/Laser/Utils.js";
-import mathEx from "Scripts/Utility/mathEx.js";
+import { BakedLaserWrapper, LaserWrapper } from "Scripts/Laser/Utils.js";
 
 
 
@@ -51,18 +49,12 @@ export const init = (self, v) => {
   Object.assign(globalThis, v);
   normalize();
 
-  if (bake) {
-    selfPos = self.getTransform()[0];
-    for (const offset of endPosOffsets)
-    lasers.push({
-      vector: mathEx.transFloat3WithQuat(
-        math.normalizeFloat3(offset),
-        self.getRotationQuaternion()
-      ),
-      maxDistance: math.lengthFloat3(offset),
-      laser: new Laser(null, material, thickness)
-    });
-  } else
+  if (bake)
+  for (const offset of endPosOffsets)
+  laserManager.bakedLasers.push(
+    new BakedLaserWrapper(self, offset, material, thickness)
+  );else
+
   for (const offset of endPosOffsets)
   laserManager.lasers.push(
     new LaserWrapper(
@@ -81,24 +73,4 @@ export const init = (self, v) => {
       isStatic
     )
   );
-};
-
-
-export const registerEvents = [
-"OnStartLevel",
-"OnPlayerDeadEnd"];
-
-
-const lasers = [];
-
-let selfPos;
-export const onEvents = () => {
-  if (bake) {
-    for (const { vector, maxDistance, laser } of lasers) {
-      laser.unfreeze();
-      laser.clearRays();
-      laser.updateRays(selfPos, vector, maxDistance);
-      laser.freeze();
-    }
-  }
 };

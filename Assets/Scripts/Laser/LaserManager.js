@@ -6,6 +6,7 @@ import {
   createScreenUI,
   BaseLaserManager } from
 
+
 "Scripts/Laser/Utils.js";
 import "Scripts/UtilClass/Manager.js";
 import { mathEx } from "Scripts/Utility/mathEx.js";
@@ -13,6 +14,7 @@ import utils from "Scripts/Utility/utils.js";
 
 class LaserManager extends BaseLaserManager {
   lasers = [];
+  bakedLasers = [];
   hurtUI = createScreenUI("Hurt");
   healUI = createScreenUI("Heal");
 
@@ -107,8 +109,16 @@ class LaserManager extends BaseLaserManager {
 
 
   {let { OnStartLevel, OnPlayerDeadEnd, OnPhysicsUpdate } = _ref5;
-    if (OnStartLevel || OnPlayerDeadEnd)
-    for (const { laser } of this.lasers) laser.clearRays();
+    if (OnStartLevel || OnPlayerDeadEnd) {
+      for (const { laser } of this.lasers) laser.clearRays();
+      for (const { laser, bindItemPos, vector, maxDistance } of this.
+      bakedLasers) {
+        laser.unfreeze();
+        laser.clearRays();
+        laser.updateRays(bindItemPos, vector, maxDistance);
+        laser.freeze();
+      }
+    }
 
     if (OnPhysicsUpdate) {
       for (const l of this.lasers) {
@@ -145,8 +155,7 @@ class LaserManager extends BaseLaserManager {
         laser.applyForce();
       }
 
-      if (!player.ballType) return;
-      this.updatePlayerStates();
+      if (player.ballType) this.updatePlayerStates();
     }
   }
 }

@@ -103,6 +103,28 @@ export class LaserWrapper {
   }
 }
 
+export class BakedLaserWrapper {
+  bindItemPos;
+  vector;
+  maxDistance;
+  laser;
+
+  constructor(
+  bindItem,
+  endPosOffset,
+  material,
+  thickness)
+  {
+    this.bindItemPos = bindItem.getTransform()[0];
+    this.vector = mathEx.transFloat3WithQuat(
+      math.normalizeFloat3(endPosOffset),
+      bindItem.getRotationQuaternion()
+    );
+    this.maxDistance = math.lengthFloat3(endPosOffset);
+    this.laser = new Laser(null, material, thickness);
+  }
+}
+
 
 
 
