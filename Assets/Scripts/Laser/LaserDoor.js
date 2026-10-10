@@ -11,7 +11,17 @@ import laserManager from "Scripts/Laser/LaserManager.js";
 
 
 
-export const init = (self, v) => Object.assign(globalThis, v);
+export const init = (self, v) => {
+  Object.assign(globalThis, v);
+
+  unlockLastTime =
+  typeof door === "undefined" ?
+  100 :
+  +scene.getItem(door).getComponent("Settings").getData("Tags")[0];
+  renderer = self.getComponent("Renderer");
+  audioPlayer = self.getComponent("AudioPlayer");
+  physicsObject = self.getComponent("PhysicsObject");
+};
 
 const unlock = () => {
   unlocked = true;
@@ -39,27 +49,13 @@ let physicsObject;
 
 
 export const registerEvents = [
-"OnLoadLevel",
 "OnPhysicsUpdate"];
 
 
 export const onEvents = (
 self, _ref) =>
 
-{let { OnLoadLevel, OnPhysicsUpdate } = _ref;
-  if (OnLoadLevel) {
-    unlockLastTime =
-    typeof door === "undefined" ?
-    100 :
-    +scene.
-    getItem(door).
-    getComponent("Settings").
-    getData("Tags")[0];
-    renderer = self.getComponent("Renderer");
-    audioPlayer = self.getComponent("AudioPlayer");
-    physicsObject = self.getComponent("PhysicsObject");
-  }
-
+{let { OnPhysicsUpdate } = _ref;
   if (OnPhysicsUpdate) {
     if (laserManager.isCastedByLaser(self)) unlockTimer = unlockLastTime;
 

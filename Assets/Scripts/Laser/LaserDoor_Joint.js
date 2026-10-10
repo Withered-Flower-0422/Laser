@@ -13,7 +13,6 @@ import laserManager from "Scripts/Laser/LaserManager.js";
 
 
 
-
 let unlockSound;
 let renderer;
 let joint;
@@ -22,8 +21,6 @@ let resetOnDeath;
 let doorItems;
 
 let active = true;
-
-const setMat = (mat) => renderer.setData({ Materials: [mat] });
 
 export const init = (self, v) => {
   Object.assign(globalThis, v);
@@ -61,14 +58,14 @@ self, _ref) =>
   }
 
   if (OnPlayerDeadEnd && resetOnDeath || OnStartLevel) {
-    setMat(preMat);
+    renderer.setData({ Materials: [preMat] });
     active = true;
   }
 
   if (OnPhysicsUpdate && active) {
     if (doorItems.some((d) => laserManager.isCastedByLaser(d))) {
       active = false;
-      setMat(nullMat);
+      renderer.setData({ Materials: [] });
       unlockSound.play();
       joint.breakJoint();
     }

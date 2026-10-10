@@ -62,9 +62,9 @@ const explode = (self) => {
   audioPlayer.play();
   renderer.setData({ Materials: [] });
   physicsObject.destroyPhysicsObject();
-  levelManager.spawnVfx("Explosion", self.getTransform()[0]);
 
   const selfPos = self.getTransform()[0];
+  levelManager.spawnVfx("Explosion", selfPos);
 
   for (const items of Object.values(scene.sphereCastAll(selfPos, range))) {
     for (const item of items) {
