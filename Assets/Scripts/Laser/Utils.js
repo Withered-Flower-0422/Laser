@@ -129,33 +129,28 @@ const tagCache =
 
 {};
 
-const setTagCache = (item) => {
-  if (item.guid in tagCache) return;
-  const tag = item.getComponent("Settings").getData("Tags");
-  tagCache[item.guid] = {
-    ignoreLaser: tag.includes("IgnoreLaser"),
-    reflectLaser: tag.includes("ReflectLaser"),
-    affectedByLaserForce: tag.includes("AffectedByLaserForce")
+const GetTag = (item) => {
+  if (item.guid in tagCache) return tagCache[item.guid];
+  const tags = item.getComponent("Settings").getData("Tags");
+  return tagCache[item.guid] = {
+    ignoreLaser: tags.includes("IgnoreLaser"),
+    reflectLaser: tags.includes("ReflectLaser"),
+    affectedByLaserForce: tags.includes("AffectedByLaserForce")
   };
 };
 
-export const isIgnoreLaser = (item) => {
-  if (item.guid === player.guid) return player.ballType === "IceBall";
-  setTagCache(item);
-  return tagCache[item.guid].ignoreLaser;
-};
+export const isIgnoreLaser = (item) =>
+item.guid === player.guid ?
+player.ballType === "IceBall" :
+GetTag(item).ignoreLaser;
 
-export const isReflectLaser = (item) => {
-  if (item.guid === player.guid) return player.ballType === "SteelBall";
-  setTagCache(item);
-  return tagCache[item.guid].reflectLaser;
-};
+export const isReflectLaser = (item) =>
+item.guid === player.guid ?
+player.ballType === "SteelBall" :
+GetTag(item).reflectLaser;
 
-export const isAffectedByLaserForce = (item) => {
-  if (item.guid === player.guid) return true;
-  setTagCache(item);
-  return tagCache[item.guid].affectedByLaserForce;
-};
+export const isAffectedByLaserForce = (item) =>
+item.guid === player.guid || GetTag(item).affectedByLaserForce;
 
 
 
