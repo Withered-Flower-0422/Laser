@@ -8,7 +8,6 @@ import {
   scene,
   uiCanvas } from
 
-
 "gameApi";
 import { Laser } from "Scripts/Laser/LaserClass.js";
 import Manager from "Scripts/UtilClass/Manager.js";
@@ -25,10 +24,7 @@ export class BaseLaserManager extends Manager {
     throw new Error("LaserManager cannot be disabled or enabled.");
   }
 
-  get tipText()
-
-
-  {
+  get tipText() {
     throw new Error("LaserManager has no tips.");
   }
 

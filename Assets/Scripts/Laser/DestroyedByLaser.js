@@ -14,14 +14,14 @@ let renderer;
 let audioPlayer;
 let physicsObject;
 
-let originalMat;
+let originalMats;
 
 export const init = (self) => {
   renderer = self.getComponent("Renderer");
   audioPlayer = self.getComponent("AudioPlayer");
   physicsObject = self.getComponent("PhysicsObject");
 
-  originalMat = renderer.getData("Materials");
+  originalMats = renderer.getData("Materials");
 };
 
 
@@ -37,7 +37,7 @@ self, _ref) =>
 {let { OnPlayerDeadEnd, OnStartLevel, OnPhysicsUpdate } = _ref;
   if (OnStartLevel || OnPlayerDeadEnd) {
     active = true;
-    renderer.setData({ Materials: originalMat });
+    renderer.setData({ Materials: originalMats });
   }
 
   if (active && OnPhysicsUpdate) {

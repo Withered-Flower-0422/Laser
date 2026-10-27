@@ -22,23 +22,11 @@ let doorItems;
 
 let active = true;
 
-export const init = (self, v) => {
-  Object.assign(globalThis, v);
-
-  unlockSound = self.getComponent("AudioPlayer");
-  renderer = scene.getItem(pic).getComponent("Renderer");
-  joint = self.getComponent("Joint");
-  preMat = renderer.getData("Materials")[0];
-  resetOnDeath = scene.
-  getItem(door).
-  getComponent("Settings").
-  getData("Tags").
-  includes("ResetOnDeath");
-  doorItems = scene.getItems(doors);
-};
+export const init = (self, v) => Object.assign(globalThis, v);
 
 
 export const registerEvents = [
+"OnLoadLevel",
 "OnStartLevel",
 "OnTimerActive",
 "OnPlayerDeadEnd",
@@ -48,7 +36,26 @@ export const registerEvents = [
 export const onEvents = (
 self, _ref) =>
 
-{let { OnPlayerDeadEnd, OnStartLevel, OnTimerActive, OnPhysicsUpdate } = _ref;
+
+
+
+
+
+
+{let { OnLoadLevel, OnPlayerDeadEnd, OnStartLevel, OnTimerActive, OnPhysicsUpdate } = _ref;
+  if (OnLoadLevel) {
+    unlockSound = self.getComponent("AudioPlayer");
+    renderer = scene.getItem(pic).getComponent("Renderer");
+    joint = self.getComponent("Joint");
+    preMat = renderer.getData("Materials")[0];
+    resetOnDeath = scene.
+    getItem(door).
+    getComponent("Settings").
+    getData("Tags").
+    includes("ResetOnDeath");
+    doorItems = scene.getItems(doors);
+  }
+
   if (OnTimerActive) {
     if (resetOnDeath) {
       active = true;

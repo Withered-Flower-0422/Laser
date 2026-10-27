@@ -25,7 +25,7 @@ const arrToObj = (arr, keys) => {
   return obj;
 };
 
-let originalMat;
+let originalMats;
 
 let active = true;
 let hurtUI;
@@ -53,7 +53,7 @@ export const init = (self, v) => {
   audioPlayer = self.getComponent("AudioPlayer");
   physicsObject = self.getComponent("PhysicsObject");
 
-  originalMat = renderer.getData("Materials");
+  originalMats = renderer.getData("Materials");
 };
 
 const explode = (self) => {
@@ -125,7 +125,7 @@ self, _ref2) =>
 {let { OnPlayerDeadEnd, OnStartLevel, OnPhysicsUpdate } = _ref2;
   if (OnStartLevel || OnPlayerDeadEnd) {
     active = true;
-    renderer.setData({ Materials: originalMat });
+    renderer.setData({ Materials: originalMats });
   }
 
   if (OnPhysicsUpdate) {
